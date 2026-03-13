@@ -1550,12 +1550,15 @@ header::before {
 }
 
 .why-code-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
   font-weight: 700;
   color: var(--navy);
   line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
+
 
 .why-code-desc {
   font-size: 14px;
