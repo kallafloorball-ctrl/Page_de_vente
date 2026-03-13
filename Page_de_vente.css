@@ -264,6 +264,42 @@ color: var(--gold);
 }
 
 
+
+/* ══════════ HERO SPLIT ══════════ */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 32px;
+  text-align: left;
+}
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.hero-right {
+  display: flex;
+  align-items: center;
+}
+
+.hero-right .hero-for-who {
+  margin: 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+
+
 /* ══════════ STATS BAR ══════════ */
 .stats-bar {
 padding: 48px 24px;
