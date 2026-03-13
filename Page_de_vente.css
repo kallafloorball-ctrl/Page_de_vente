@@ -1572,14 +1572,16 @@ header::before {
   transition: all 0.3s;
 }
 
-.why-code-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(200,155,60,0.4);
+.why-code-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
 }
 
 .why-code-icon {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   background: rgba(13,27,53,0.15);
   border: 1px solid rgba(13,27,53,0.2);
   border-radius: 10px;
@@ -1587,15 +1589,15 @@ header::before {
   align-items: center;
   justify-content: center;
   color: var(--navy);
-  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .why-code-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--navy);
-  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
 .why-code-desc {
