@@ -1234,7 +1234,40 @@ header::before {
 }
 
 
+.about-content {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 56px;
+  align-items: start;
+  margin-top: 48px;
+}
 
+.about-photo {
+  position: sticky;
+  top: 100px;
+}
+
+.about-img {
+  width: 100%;
+  border-radius: 16px;
+  border: 2px solid rgba(200,155,60,0.3);
+  box-shadow: 
+    0 20px 60px rgba(0,0,0,0.4),
+    0 0 0 8px rgba(200,155,60,0.06);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo {
+    position: static;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
 
 
 
