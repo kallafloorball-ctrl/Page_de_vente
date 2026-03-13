@@ -500,18 +500,18 @@ font-weight: 700;
 }
 
 
-.card-pack:hover {
+/* .card-pack:hover {
   transform: none;
   border-color: var(--gold);
   background: linear-gradient(135deg, rgba(17,34,64,0.9), rgba(26,52,96,0.7));
   box-shadow: 0 0 30px rgba(200,155,60,0.2), 
               0 0 60px rgba(200,155,60,0.1),
               inset 0 0 30px rgba(200,155,60,0.03);
-}
+} */
 
-.card-pack:hover::before {
+/* .card-pack:hover::before {
   opacity: 1;
-}
+} */
 
 
 
