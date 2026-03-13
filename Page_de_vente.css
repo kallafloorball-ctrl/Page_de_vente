@@ -476,14 +476,14 @@ color: var(--gold); flex-shrink: 0;
 margin-top: 1px;
 }
 
+
 /* ── PACK CARD ── */
+
 .card-pack {
 grid-column: 1 / -1;
 background: linear-gradient(135deg, rgba(17,34,64,0.9), rgba(26,52,96,0.7));
-
 display: grid; grid-template-columns: 1fr auto;
 align-items: center; gap: 32px;
-
 border: 2px solid var(--gold);
 box-shadow: 0 0 30px rgba(200,155,60,0.2), 
             0 0 60px rgba(200,155,60,0.1),
@@ -498,6 +498,23 @@ color: var(--navy); background: var(--gold);
 padding: 4px 10px; border-radius: 2px;
 font-weight: 700;
 }
+
+
+.card-pack:hover {
+  transform: none;
+  border-color: var(--gold);
+  background: inherit;
+  box-shadow: 0 0 30px rgba(200,155,60,0.2), 
+              0 0 60px rgba(200,155,60,0.1),
+              inset 0 0 30px rgba(200,155,60,0.03);
+}
+
+.card-pack:hover::before {
+  opacity: 1;
+}
+
+
+
 
 .pack-price-block { text-align: right; }
 
