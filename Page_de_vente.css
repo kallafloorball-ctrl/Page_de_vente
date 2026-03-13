@@ -1636,12 +1636,13 @@ header::before {
 .why-code-title {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--navy);
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  -webkit-text-stroke: 0.5px rgba(13,27,53,0.5);
 }
 
 
