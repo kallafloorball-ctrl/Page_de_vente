@@ -1552,12 +1552,12 @@ header::before {
   border-radius: 16px;
   padding: 36px 32px;
   position: relative;
-  overflow: hidden;
+  transform-style: preserve-3d;
   box-shadow: 
     0 8px 32px rgba(200,155,60,0.3),
     inset 0 1px 0 rgba(255,255,255,0.4),
     inset 0 -1px 0 rgba(0,0,0,0.1);
-  transform: perspective(1000px) rotateX(2deg);
+  transform: perspective(800px) rotateX(4deg) rotateY(-2deg);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
