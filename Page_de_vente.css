@@ -1531,7 +1531,9 @@ header::before {
 .why-code-card:hover {
   border-color: rgba(200,155,60,0.4);
   transform: translateY(-4px);
-}
+} 
+
+
 
 .why-code-icon {
   width: 52px;
