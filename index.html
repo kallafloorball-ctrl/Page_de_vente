@@ -1,1005 +1,2131 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Académie de Trading Algorithmique</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="Page_de_vente.css">
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="{% static 'images/logo_transp.png' %}">
+  <title>Méthodologie quantitative — Académie de Trading Algorithmique</title>
 
-<link rel="icon" type="image/png" href="Logo/logo.png">
-<meta name="description" content="Apprenez à créer des stratégies de trading algorithmique en Python, de zéro à la stratégie institutionnelle.">
-<meta property="og:title" content="Académie de Trading Algorithmique">
-<meta property="og:description" content="De zéro à votre premier algorithme. Sans expérience requise.">
-<meta property="og:image" content="Logo/logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <style>
+    /* ══════════════════════════════════════════════
+       offre_v4.html — product feeling elite
+       Base : v3 — polish de précision uniquement
+       Phases 1→6 : depth organique · roadmap signature ·
+       sticky elite · product feeling · mobile CTA flottant ·
+       dashboard hooks
+    ══════════════════════════════════════════════ */
+
+    :root {
+      /* ── Palette ── */
+      --gold:           #c8972a;
+      --gold-pale:      #f0c855;
+      --gold-deep:      #8a6418;
+      --gold-fog:       rgba(200,155,60,0.055);
+      --cream:          #f5f0e8;
+      --cream-dim:      rgba(245,240,232,0.48);
+      --navy:           #071228;
+      --navy-mid:       #0a1830;
+      --navy-surface:   rgba(10,20,42,0.70);
+      --green:          #4ade80;
+      --green-dim:      rgba(74,222,128,0.65);
+
+      /* ── Spacing system — base 4px ── */
+      --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
+      --sp-4: 16px; --sp-5: 20px; --sp-6: 24px;
+      --sp-7: 28px; --sp-8: 32px;
+      --sp-9: 48px; --sp-10: 40px;
+
+      /* ── Radius tokens ── */
+      --r-sm:  8px;
+      --r-md:  12px;
+      --r-lg:  16px;
+      --r-xl:  20px;
+      --r-pill: 100px;
+
+      /* ── Timing tokens ── */
+      --ease-out:    cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t-fast:   0.18s;
+      --t-mid:    0.30s;
+      --t-slow:   0.50s;
+      --t-crawl:  0.70s;
+
+      /* ── Nav ── */
+      --nav-height: 64px;
+
+      /* ── Mobile CTA ── */
+      --mobile-cta-height: 72px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--cream);
+      background: var(--navy);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ══════════════════════════════════════════════
+       PHASE 1 — HERO DEPTH ORGANIQUE
+       Fond multi-couches, diffus, sans zones plates
+    ══════════════════════════════════════════════ */
+
+    /* Couche 1 — gradient organique principal */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      background:
+        /* Source de lumière haute-gauche très froide */
+        radial-gradient(ellipse 60% 30% at 20% -5%,  rgba(100,140,220,0.03) 0%, transparent 55%),
+        /* Glow gold diffus — centre haut */
+        radial-gradient(ellipse 80% 45% at 50% -8%,  rgba(200,155,60,0.04) 0%, transparent 60%),
+        /* Fond de base dégradé diagonal */
+        linear-gradient(158deg,
+          rgba(3,8,22,0.97)  0%,
+          rgba(7,18,40,0.90) 40%,
+          rgba(5,13,32,0.95) 70%,
+          rgba(3,8,22,0.98) 100%
+        );
+    }
+
+    /* Couche 2 — noise organique */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 1;
+      pointer-events: none;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.028'/%3E%3C/svg%3E");
+      background-size: 512px 512px;
+      mix-blend-mode: soft-light;
+      opacity: 0.40;
+      will-change: transform;
+      contain: strict;
+    }
+
+    /* ══════════════════════════════════════════════
+       KEYFRAMES — Phase 4 : ambient motion ultra-lent
+    ══════════════════════════════════════════════ */
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(22px) }
+      to   { opacity:1; transform:translateY(0) }
+    }
+    @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+    /* ★ Drift ambiant très lent — fond hero */
+    @keyframes heroDrift {
+      0%,100% { opacity:0.80; transform:scale(1)    translateY(0px)  }
+      50%     { opacity:1;    transform:scale(1.04) translateY(-6px) }
+    }
+    /* ★ Pulsation glow hero — quasi invisible */
+    @keyframes heroGlow {
+      0%,100% { opacity:0.55 }
+      50%     { opacity:0.85 }
+    }
+    /* Filet or */
+      50%     { opacity:0.88 }
+    }
+    /* Badge blink — opacity only */
+    @keyframes blink {
+      0%,100% { opacity:1; }
+      50%     { opacity:0.22; }
+    }
+    /* CTA pulse — scale only, no box-shadow repaint */
+      50%     { transform: scale(1.012); }
+    }
+    /* Shimmer sweep */
+      25%  { opacity:0.07 }
+      100% { transform:translateX(280%)  skewX(-20deg); opacity:0 }
+    }
+    /* Cadenas wiggle */
+    @keyframes lockWiggle {
+      0%,100%{transform:rotate(0)} 20%{transform:rotate(-4deg)}
+      40%{transform:rotate(3deg)} 60%{transform:rotate(-2deg)} 80%{transform:rotate(1deg)}
+    }
+    /* Hero stats entrée */
+    @keyframes statUp {
+      from { opacity:0; transform:translateY(10px) }
+      to   { opacity:1; transform:translateY(0) }
+    }
+    /* Mobile CTA slide-up */
+    @keyframes slideUp {
+      from { transform:translateY(100%); opacity:0 }
+      to   { transform:translateY(0);    opacity:1 }
+    }
+    /* Scroll indicator bounce */
+    @keyframes scrollBounce {
+      0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)}
+    }
+
+    /* ══════════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════════ */
+    nav {
+      position: fixed; top:0; left:0; right:0;
+      height: var(--nav-height); z-index: 900;
+      padding: 0 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(4,8,18,0.92);
+      border-bottom: 1px solid rgba(200,155,60,0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    nav::after {
+      content: ''; position:absolute; bottom:0; left:0; right:0; height:1px;
+      background: linear-gradient(90deg,
+        transparent 0%, rgba(200,155,60,0.25) 20%,
+        rgba(240,200,85,0.60) 50%, rgba(200,155,60,0.25) 80%, transparent 100%
+      );
+    }
+    .nav-logo { display:flex; align-items:center; gap:11px; text-decoration:none; }
+    .nav-logo img {
+      width:28px; height:28px;
+      filter: drop-shadow(0 0 7px rgba(200,155,60,0.38));
+      object-fit:contain;
+      transition: filter var(--t-mid) ease;
+    }
+    .nav-logo:hover img { filter: drop-shadow(0 0 13px rgba(200,155,60,0.60)); }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size:15px; font-weight:600; color:var(--cream);
+      line-height:1.2; letter-spacing:0.01em;
+    }
+    .nav-right { display:flex; align-items:center; gap:12px; }
+    .btn-nav {
+      display:inline-flex; align-items:center;
+      padding:7px 18px; border-radius:var(--r-sm);
+      font-family:'DM Sans',sans-serif; font-size:12px; font-weight:700;
+      text-decoration:none;
+      background: linear-gradient(135deg,#f4e4a3,#d4af37 60%,#b8962e);
+      color:#161008;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.24);
+      transition: transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) ease;
+    }
+    .btn-nav:hover { transform:translateY(-1px); box-shadow:0 4px 18px rgba(180,130,20,0.32); }
+    @media(max-width:600px){ nav{padding:0 20px;} .nav-brand{display:none;} }
+
+    /* ══════════════════════════════════════════════
+       LAYOUT
+    ══════════════════════════════════════════════ */
+    .offre-page {
+      position:relative; z-index:2;
+      padding: calc(var(--nav-height) + 80px) 40px 140px;
+      box-sizing:border-box;
+    }
+    /* ═══════════════════════════════════════
+       FIX STICKY FINAL — VERSION PROPRE
+    ═══════════════════════════════════════ */
+
+    html { overflow-x:hidden; }
+
+    .offre-inner {
+      max-width:1400px;
+      margin:0 auto;
+      width:100%;
+    }
+
+    .offre-grid {
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 340px;
+      gap:48px;
+      align-items:start;
+    }
+
+    .offre-left {
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      gap:40px;
+    }
+
+    .offre-sticky-wrapper {
+      position:sticky;
+      top:calc(var(--nav-height) + 24px);
+      align-self:start;
+    }
+
+    @media(max-width:1320px){
+      .offre-page  { padding-left:24px; padding-right:24px; }
+      .offre-grid  { grid-template-columns:minmax(0,1fr) 310px; gap:32px; }
+    }
+
+    @media(max-width:1180px){
+      .offre-grid  { grid-template-columns:minmax(0,1fr) 290px; gap:24px; }
+    }
+
+    @media(max-width:980px){
+      .offre-grid            { grid-template-columns:1fr; }
+      .offre-sticky-wrapper  { display:none; }
+    }
+
+    @media(max-width:600px){
+      .offre-page  { padding-left:16px; padding-right:16px; }
+    }
+
+
+    /* ══════════════════════════════════════════════
+       HERO — Phase 1 raffiné
+    ══════════════════════════════════════════════ */
+    .offre-header {
+      text-align:center;
+      margin-bottom: 0;
+      position:relative;
+      animation: fadeInUp var(--t-slow) var(--ease-out) both;
+    }
+
+/* Grid SVG quantitative — plus diffuse, plus institutionnelle */
+    .hero-grid-bg {
+      position:absolute;
+      top:-50px; left:50%;
+      transform:translateX(-50%);
+      width:520px; height:240px;
+      pointer-events:none;
+      opacity:0.14;
+      overflow:hidden;
+      animation: fadeIn 1.8s ease 0.4s both;
+    }
+
+    .offre-badge {
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid rgba(200,155,60,0.24);
+      padding:6px 20px; border-radius:var(--r-pill);
+      font-size:10.5px; letter-spacing:0.17em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:var(--sp-7);
+      background:rgba(200,155,60,0.04);
+      
+      animation: fadeInUp var(--t-slow) 0.10s var(--ease-out) both;
+    }
+    .offre-badge-dot {
+      width:5px; height:5px; border-radius:50%;
+      background:var(--gold-pale);
+      box-shadow:0 0 5px 2px rgba(240,200,85,0.38);
+      animation: blink 2.4s ease-in-out infinite;
+      flex-shrink:0;
+    }
+
+    .offre-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(32px,5.5vw,58px);
+      font-weight:300;
+      line-height:1.07;
+      letter-spacing:-0.025em;
+      color:var(--cream);
+      margin-bottom:var(--sp-6);
+      animation: fadeInUp var(--t-slow) 0.18s var(--ease-out) both;
+    }
+    .offre-title em {
+      font-style:italic;
+      font-weight:600;
+      color:#c9a84c;
+    }
+
+    /* ★ Sous-titre enrichi — léger letterspacing quantitatif */
+    .offre-subtitle {
+      font-size:15px;
+      color:rgba(245,240,232,0.54);
+      line-height:1.82;
+      max-width:620px; margin:0 auto var(--sp-5);
+      font-weight:300;
+      letter-spacing:0.005em;
+      animation: fadeInUp var(--t-slow) 0.26s var(--ease-out) both;
+    }
+
+    .hero-micro {
+      font-size:11.5px;
+      color:rgba(245,240,232,0.28);
+      letter-spacing:0.06em;
+      font-style:italic;
+      margin-bottom:var(--sp-7);
+      font-weight:300;
+      line-height:1.7;
+      text-align:center;
+      animation: fadeInUp var(--t-slow) 0.32s var(--ease-out) both;
+    }
+
+    /* ══════════════════════════════════════════════
+       CORE STATEMENT — manifesto institutionnel
+    ══════════════════════════════════════════════ */
+    .core-statement-wrap {
+      text-align:center;
+      margin-top:-8px;
+      margin-bottom:0;
+    }
+    .core-statement-label {
+      margin-bottom:20px;
+      font-size:10px;
+      letter-spacing:0.28em;
+      text-transform:uppercase;
+      color:rgba(200,155,60,0.48);
+      font-family:'DM Sans',sans-serif;
+      font-weight:600;
+    }
+    .core-statement-inner {
+      max-width:580px;
+      margin:0 auto;
+      text-align:left;
+    }
+    .core-statement {
+      display:block;
+      font-family:'Cormorant Garamond',serif;
+      font-style:italic;
+      font-weight:400;
+      font-size:clamp(22px,2vw,32px);
+      line-height:1.48;
+      letter-spacing:-0.02em;
+      color:rgba(255,255,255,0.90);
+      margin-bottom:26px;
+      opacity:0;
+      transform:translateY(10px);
+      transition:opacity 1.1s cubic-bezier(0.22,1,0.36,1), transform 1.1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .core-statement.is-visible {
+      opacity:1;
+      transform:translateY(0);
+    }
+    @media(max-width:768px){
+      .core-statement-inner { padding:0 16px; }
+      .core-statement { font-size:clamp(18px,5vw,22px); line-height:1.52; margin-bottom:16px; }
+    }
+
+    .hero-stats {
+      display:inline-flex; align-items:center; gap:var(--sp-6);
+      padding:14px 32px; border-radius:var(--r-pill);
+      border:1px solid rgba(200,155,60,0.13);
+      background:rgba(6,12,28,0.82);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.04) inset,
+        0 8px 24px rgba(0,0,0,0.22);
+      animation: fadeInUp var(--t-slow) 0.36s var(--ease-out) both;
+    }
+    .hero-stat { text-align:center; }
+    .hero-stat-val {
+      font-family:'Cormorant Garamond',serif;
+      font-size:22px; font-weight:600;
+      color:var(--gold-pale); line-height:1;
+      animation: statUp 0.55s var(--ease-out) 0.52s both;
+    }
+    .hero-stat-lbl {
+      font-size:9px; letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(245,240,232,0.26); margin-top:5px;
+    }
+    .hero-stat-sep { width:1px; height:24px; background:rgba(200,155,60,0.11); }
+
+    /* ★ Scroll indicator ultra-discret */
+    .hero-scroll-hint {
+      margin-top:var(--sp-4);
+      display:flex; flex-direction:column; align-items:center; gap:6px;
+      font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(245,240,232,0.18);
+      animation: fadeIn 1.2s ease 0.8s both;
+    }
+    .hero-scroll-hint-arrow {
+      width:1px; height:20px;
+      background:linear-gradient(180deg, rgba(200,155,60,0.30), transparent);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    /* ══════════════════════════════════════════════
+       GRID
+    ══════════════════════════════════════════════ */
+
+    /* ══════════════════════════════════════════════
+       BLOCS — Phase 4 : cohérence radius + shadows
+    ══════════════════════════════════════════════ */
+    .offre-block {
+      background:rgba(255,255,255,0.038);
+      border:1px solid rgba(200,155,60,0.12);
+      border-radius:var(--r-lg);
+      padding:var(--sp-8) var(--sp-7);
+      position:relative;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.04) inset,
+        0 12px 36px rgba(0,0,0,0.20);
+      animation: fadeInUp var(--t-slow) var(--ease-out) both;
+    }
+    .offre-block:nth-child(1){animation-delay:0.08s}
+    .offre-block:nth-child(2){animation-delay:0.16s}
+    .offre-block:nth-child(3){animation-delay:0.24s}
+    .offre-block:nth-child(4){animation-delay:0.32s}
+    .offre-block:nth-child(5){animation-delay:0.40s}
+
+    /* ★ Titre bloc — hiérarchie type affinée */
+    .offre-block-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px; font-weight:600;
+      color:var(--cream);
+      letter-spacing:-0.02em;
+      line-height:1.15;
+      margin-bottom:var(--sp-2);
+    }
+    .offre-block::before {
+      content:''; position:absolute; top:0; left:6%; right:6%; height:1px;
+      background:linear-gradient(90deg,
+        transparent, rgba(200,155,60,0.38) 30%,
+        rgba(240,200,85,0.70) 50%, rgba(200,155,60,0.38) 70%, transparent
+      );
+    }
+    .offre-block-subtitle {
+      font-size:14px; color:rgba(245,240,232,0.56);
+      margin-bottom:var(--sp-7); line-height:1.72; font-weight:300;
+    }
+
+    /* ★ Section label — tag discret en haut à droite des blocs */
+    .block-tag {
+      position:absolute; top:var(--sp-6); right:var(--sp-6);
+      font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(200,155,60,0.36);
+    }
+
+    /* ══════════════════════════════════════════════
+       QUANT NOTES — micro-statements institutionnels
+    ══════════════════════════════════════════════ */
+    .quant-note {
+      max-width:620px;
+      margin:64px 0;
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      animation: fadeInUp 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    /* Asymétrie maîtrisée — 4 positions */
+    .quant-note--r  { margin-left:auto; margin-right:0; }
+    .quant-note--c  { margin-left:auto; margin-right:auto; }
+    .quant-note--l  { margin-left:0;    margin-right:auto; max-width:560px; }
+
+    .quant-note-label {
+      font-size:11px;
+      letter-spacing:0.22em;
+      text-transform:uppercase;
+      color:rgba(200,155,60,0.52);
+      font-family:'DM Sans',sans-serif;
+      font-weight:600;
+      opacity:0.72;
+    }
+    .quant-note-text {
+      font-size:clamp(20px,1.8vw,28px);
+      line-height:1.55;
+      letter-spacing:-0.02em;
+      color:rgba(245,240,232,0.68);
+      font-family:'Cormorant Garamond',serif;
+      font-weight:300;
+      font-style:italic;
+    }
+    @media(max-width:980px){
+      .quant-note,
+      .quant-note--r,
+      .quant-note--c,
+      .quant-note--l { margin:72px 0; max-width:100%; }
+      .quant-note-text { font-size:20px; line-height:1.6; }
+    }
+
+    /* ══════════════════════════════════════════════
+       AVANT / APRÈS
+    ══════════════════════════════════════════════ */
+    /* ── Transformation table : grille ligne par ligne ── */
+    .transformation-grid {
+      display: grid;
+      grid-template-columns: 130px 1fr 1fr;
+      gap: 0 14px;
+      align-items: stretch;
+    }
+    @media(max-width:540px){ .transformation-grid{ grid-template-columns:1fr; } }
+
+    /* En-tête (ligne 0) : cellule vide + AVANT + APRÈS */
+    .transfo-header-empty { /* cellule vide colonne axe */ }
+    .transfo-header {
+      padding: 10px 18px 14px;
+      font-size: 14px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .transfo-header--before {
+      color: rgba(255,110,110,0.55);
+      background: rgba(255,70,70,0.025);
+      border: 1px solid rgba(255,70,70,0.08);
+      border-radius: var(--r-md) var(--r-md) 0 0;
+    }
+    .transfo-header--after {
+      color: rgba(74,222,128,0.58);
+      background: rgba(74,222,128,0.025);
+      border: 1px solid rgba(74,222,128,0.09);
+      border-radius: var(--r-md) var(--r-md) 0 0;
+    }
+
+    /* Lignes de contenu */
+    .transfo-row-axis {
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 10px 12px 10px 8px;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(200,155,60,0.52);
+      text-align: right;
+    }
+    .transfo-row-before {
+      background: rgba(255,70,70,0.025);
+      border-left: 1px solid rgba(255,70,70,0.08);
+      border-right: 1px solid rgba(255,70,70,0.08);
+      padding: 10px 18px;
+    }
+    .transfo-row-after {
+      background: rgba(74,222,128,0.025);
+      border-left: 1px solid rgba(74,222,128,0.09);
+      border-right: 1px solid rgba(74,222,128,0.09);
+      padding: 10px 18px;
+    }
+
+    /* Arrondi bas uniquement sur la dernière ligne */
+    .transfo-row-before--last {
+      border-bottom: 1px solid rgba(255,70,70,0.08);
+      border-radius: 0 0 var(--r-md) var(--r-md);
+    }
+    .transfo-row-after--last {
+      border-bottom: 1px solid rgba(74,222,128,0.09);
+      border-radius: 0 0 var(--r-md) var(--r-md);
+    }
+
+    .transfo-item {
+      display: flex; align-items: flex-start; gap: 9px;
+      font-size: 14px; line-height: 1.72; color: rgba(245,240,232,0.70);
+    }
+    .transfo-icon { flex-shrink: 0; margin-top: 1px; font-size: 10px; line-height: 1.60; }
+    .transfo-icon--b { color: rgba(255,100,100,0.50); }
+    .transfo-icon--a { color: rgba(74,222,128,0.60); }
+
+    /* Compatibilité anciennes classes (non utilisées après refacto) */
+    .transfo-col { border-radius:var(--r-md); padding:16px 18px; }
+    .transfo-col--before { background:rgba(255,70,70,0.025); border:1px solid rgba(255,70,70,0.08); }
+    .transfo-col--after  { background:rgba(74,222,128,0.025); border:1px solid rgba(74,222,128,0.09); }
+    .transfo-label { font-size:9px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:14px; }
+    .transfo-label--before { font-size:14px; color:rgba(255,110,110,0.55); }
+    .transfo-label--after  { font-size:14px; color:rgba(74,222,128,0.58); }
+    .transfo-list { display:flex; flex-direction:column; gap:9px; }
+
+    /* ══════════════════════════════════════════════
+       ROADMAP TIMELINE — MINIMAL PREMIUM
+    ══════════════════════════════════════════════ */
+
+    /* ── Wrapper du bloc roadmap ── */
+    .roadmap-block {
+      background:rgba(255,255,255,0.020);
+      border:1px solid rgba(200,155,60,0.12);
+      border-radius:var(--r-lg);
+      padding:var(--sp-7) var(--sp-7);
+      position:relative;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.035) inset,
+        0 12px 36px rgba(0,0,0,0.20);
+      animation:fadeInUp var(--t-slow) 0.16s var(--ease-out) both;
+    }
+    .roadmap-block::before {
+      content:''; position:absolute; top:0; left:10%; right:10%; height:1px;
+      background:linear-gradient(90deg,
+        transparent, rgba(200,155,60,0.38) 30%,
+        rgba(240,200,85,0.70) 50%, rgba(200,155,60,0.38) 70%, transparent
+      );
+
+    }
+    .roadmap-block-tag {
+      position:absolute; top:var(--sp-6); right:var(--sp-6);
+      font-size:9px; font-weight:700;
+      letter-spacing:0.14em; text-transform:uppercase;
+      color:rgba(200,155,60,0.36);
+    }
+    .roadmap-block-title {
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px; font-weight:600;
+      color:var(--cream); letter-spacing:-0.02em;
+      line-height:1.15; margin-bottom:var(--sp-2);
+    }
+    .roadmap-block-subtitle {
+      font-size:14px; color:rgba(245,240,232,0.56);
+      margin-bottom:48px; line-height:1.72; font-weight:300;
+    }
+
+    /* ── Timeline container ── */
+    .tl { position:relative; display:flex; flex-direction:column; gap:0; }
+
+    /* Ligne verticale — gradient d'activation N1→N6 */
+    .tl::before {
+      content:'';
+      position:absolute; left:22px; top:28px; bottom:28px; width:1px;
+      background:linear-gradient(180deg,
+        rgba(200,155,60,0.06)  0%,
+        rgba(200,155,60,0.12) 25%,
+        rgba(200,155,60,0.20) 55%,
+        rgba(200,155,60,0.30) 78%,
+        rgba(200,155,60,0.38) 100%
+      );
+    }
+    /* Halo diffus sur la ligne */
+    .tl::after {
+      content:'';
+      position:absolute; left:18px; top:28px; bottom:28px; width:9px;
+      background:linear-gradient(180deg,
+        transparent            0%,
+        rgba(200,155,60,0.02) 40%,
+        rgba(200,155,60,0.05) 75%,
+        rgba(200,155,60,0.07) 100%
+      );
+      filter:blur(5px); pointer-events:none;
+    }
+
+    /* ── Élément timeline — base ── */
+    .tl-item {
+      display:flex; align-items:flex-start; gap:32px;
+      padding:20px 0 24px; position:relative; cursor:default;
+    }
+
+    /* ── Nœud ── */
+    .tl-node {
+      position:relative; flex-shrink:0; width:44px;
+      display:flex; flex-direction:column; align-items:center;
+      margin-top:3px; z-index:2;
+    }
+    .tl-index {
+      font-family:'Cormorant Garamond',serif;
+      font-size:10px; font-weight:600; letter-spacing:0.08em;
+      color:rgba(200,155,60,0.30); line-height:1;
+      margin-bottom:7px; text-align:center;
+    }
+    .tl-dot {
+      width:9px; height:9px; border-radius:50%; flex-shrink:0;
+    }
+    .tl-dot--unlocked {
+      background:rgba(74,222,128,0.50); box-shadow:none;
+    }
+    .tl-dot--current {
+      background:rgba(240,200,85,0.65);
+      box-shadow:0 0 0 2px rgba(200,155,60,0.06), 0 0 5px rgba(200,155,60,0.14);
+    }
+    .tl-dot--locked {
+      background:rgba(200,155,60,0.14); box-shadow:none;
+    }
+
+    /* ── Corps ── */
+    .tl-body {
+      flex:1; min-width:0; padding-bottom:4px;
+      border-bottom:1px solid rgba(255,255,255,0.028);
+    }
+    .tl-item:last-child .tl-body { border-bottom:none; }
+
+    .tl-header {
+      display:flex; align-items:baseline;
+      justify-content:space-between; gap:10px; margin-bottom:4px;
+    }
+    .tl-name {
+      font-family:'Cormorant Garamond',serif;
+      font-size:19.5px; font-weight:600; color:rgba(245,240,232,0.95);
+      letter-spacing:-0.018em; line-height:1.22;
+    }
+    .tl-item--locked .tl-name { color:rgba(245,240,232,0.95); }
+
+    .tl-desc {
+      font-size:14px; color:rgba(245,240,232,0.72);
+      line-height:1.62; font-weight:300; margin-bottom:0;
+    }
+    .tl-item--locked .tl-desc { color:rgba(245,240,232,0.72); }
+
+    .tl-competence {
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12.5px; color:rgba(200,155,60,0.70);
+      font-weight:300; letter-spacing:0.01em; line-height:1.45;
+      padding:5px 12px 5px 13px;
+      border-left:1px solid rgba(200,155,60,0.26);
+      background:rgba(200,155,60,0.014);
+      border-radius:0 var(--r-sm) var(--r-sm) 0;
+      margin-top:10px;
+    }
+    .tl-competence::before { content:'↳'; font-size:10px; opacity:0.50; flex-shrink:0; }
+    .tl-item--locked .tl-competence {
+      color:rgba(200,155,60,0.70); border-left-color:rgba(200,155,60,0.26);
+      background:rgba(200,155,60,0.014);
+    }
+    .tl-item--locked .tl-competence::before { opacity:0.50; }
+
+    /* ── Badges ── */
+    .tl-badge {
+      flex-shrink:0; font-size:9.5px; font-weight:700;
+      letter-spacing:0.10em; text-transform:uppercase;
+      padding:3px 10px; border-radius:var(--r-pill); white-space:nowrap;
+    }
+    .tl-badge--free    { color:rgba(74,222,128,0.48); background:transparent; border:1px solid rgba(74,222,128,0.09); }
+    .tl-badge--premium { color:rgba(200,155,60,0.75); background:rgba(200,155,60,0.05); border:1px solid rgba(200,155,60,0.18); }
+
+    /* ── Cadenas ── */
+    .tl-lock {
+      position:absolute; right:0; top:22px;
+      color:rgba(200,155,60,0.12);
+    }
+
+    /* ══════════════════════════════════════════════
+       PROGRESSION N1 → N6
+       Espacement · Typographie · Dots · Compétences
+    ══════════════════════════════════════════════ */
+
+    /* N1 — fondation, sobre, compact */
+    .tl-item[data-level="1"] { padding:18px 0 20px; }
+    .tl-item[data-level="1"] .tl-name  {}
+    .tl-item[data-level="1"] .tl-desc  {}
+    .tl-item[data-level="1"] .tl-index { color:rgba(200,155,60,0.20); font-size:24px; }
+    .tl-item[data-level="1"] .tl-competence {}
+    .tl-item[data-level="1"] .tl-dot--current,
+    .tl-item[data-level="1"] .tl-dot--unlocked { width:7px; height:7px; opacity:0.70; }
+
+    /* N2 — stratégie, plus structuré */
+    .tl-item[data-level="2"] { padding:22px 0 26px; }
+    .tl-item[data-level="2"] .tl-name  {}
+    .tl-item[data-level="2"] .tl-desc  {}
+    .tl-item[data-level="2"] .tl-index { color:rgba(200,155,60,0.28); font-size:24px; }
+    .tl-item[data-level="2"] .tl-dot--locked { background:rgba(200,155,60,0.18); }
+    .tl-item[data-level="2"] .tl-competence {}
+
+    /* N3 — architecture institutionnelle */
+    .tl-item[data-level="3"] { padding:26px 0 30px; }
+    .tl-item[data-level="3"] .tl-name  {}
+    .tl-item[data-level="3"] .tl-desc  {}
+    .tl-item[data-level="3"] .tl-index { color:rgba(200,155,60,0.34); font-size:24px; }
+    .tl-item[data-level="3"] .tl-dot--locked { background:rgba(200,155,60,0.22); }
+    .tl-item[data-level="3"] .tl-competence {}
+
+    /* N4 — validation quantitative, risk management */
+    .tl-item[data-level="4"] { padding:30px 0 36px; }
+    .tl-item[data-level="4"] .tl-name  {}
+    .tl-item[data-level="4"] .tl-desc  {}
+    .tl-item[data-level="4"] .tl-index { color:rgba(200,155,60,0.40); font-size:24px; }
+    .tl-item[data-level="4"] .tl-dot--locked { background:rgba(200,155,60,0.26); width:10px; height:10px; }
+    .tl-item[data-level="4"] .tl-competence {}
+
+    /* N5 — production réelle */
+    .tl-item[data-level="5"] { padding:34px 0 40px; }
+    .tl-item[data-level="5"] .tl-name  {}
+    .tl-item[data-level="5"] .tl-desc  {}
+    .tl-item[data-level="5"] .tl-index { color:rgba(200,155,60,0.46); font-size:24px; }
+    .tl-item[data-level="5"] .tl-dot--locked { background:rgba(200,155,60,0.30); width:10px; height:10px; box-shadow:0 0 5px rgba(200,155,60,0.08); }
+    .tl-item[data-level="5"] .tl-competence {}
+
+    /* N6 — apex, aboutissement */
+    .tl-item[data-level="6"] { padding:38px 0 64px; }
+    .tl-item[data-level="6"] .tl-name  {
+      font-size:19.5px; font-weight:600; letter-spacing:-0.018em;
+      color:rgba(245,240,232,0.95);
+    }
+    .tl-item[data-level="6"] .tl-desc  {}
+    .tl-item[data-level="6"] .tl-index { color:rgba(200,155,60,0.55); font-size:24px; letter-spacing:0.10em; }
+    .tl-item[data-level="6"] .tl-dot--locked {
+      background:rgba(200,155,60,0.36); width:11px; height:11px;
+      box-shadow:0 0 7px rgba(200,155,60,0.12);
+    }
+    .tl-item[data-level="6"] .tl-competence {
+      color:rgba(200,155,60,0.70); border-left-color:rgba(200,155,60,0.26);
+      font-size:12.5px; background:rgba(200,155,60,0.014);
+    }
+    .tl-item[data-level="6"] .tl-competence::before { opacity:0.50; }
+    .tl-item[data-level="6"] .tl-body { border-bottom:none; }
+
+    /* ── Mobile ── */
+    @media(max-width:600px){
+      .roadmap-block { padding:20px 16px; }
+      .tl::before { left:16px; top:18px; bottom:18px; }
+      .tl::after  { left:14px; top:18px; bottom:18px; }
+      .tl-node  { width:32px; }
+      .tl-index { font-size:24px; }
+      .tl-dot   { width:8px; height:8px; }
+      .tl-item  { gap:16px; padding:18px 0 22px; }
+      .tl-name  { font-size:17px; }
+      .tl-desc  { font-size:12.5px; margin-bottom:0; }
+      .tl-competence { font-size:11.5px; margin-top:8px; }
+      .tl-badge { font-size:9.5px; padding:2px 9px; }
+    }
+    @media(max-width:380px){
+      .tl-header { flex-wrap:wrap; gap:6px; }
+      .tl-badge  { align-self:flex-start; }
+    }
+
+    /* ══════════════════════════════════════════════
+       POUR QUI
+    ══════════════════════════════════════════════ */
+    .included-list { display:flex; flex-direction:column; gap:var(--sp-3); }
+    .included-item {
+      display:flex; align-items:flex-start; gap:var(--sp-3);
+      font-size:13px; color:rgba(245,240,232,0.56);
+      padding:11px 13px; border-radius:var(--r-md);
+      border:1px solid transparent;
+      transition:border-color var(--t-mid) ease, background var(--t-mid) ease;
+    }
+    .included-item { border-color:rgba(200,155,60,0.06); }
+    .included-item.align-center { align-items:center; }
+    .included-item strong { display:block; color:var(--cream); font-size:14px; font-weight:600; margin-bottom:3px; }
+    .included-item span { font-size:14px; color:rgba(245,240,232,0.40); line-height:1.60; }
+    .included-icon {
+      width:26px; height:26px; border-radius:7px;
+      background:rgba(200,155,60,0.06); border:1px solid rgba(200,155,60,0.15);
+      display:flex; align-items:center; justify-content:center;
+      font-size:12px; flex-shrink:0; color:var(--gold); font-weight:700;
+    }
+    .included-icon--red { color:rgba(255,120,120,0.72); border-color:rgba(255,70,70,0.13); background:rgba(255,70,70,0.04); }
+
+    /* ══════════════════════════════════════════════
+       PACK INCLUS
+    ══════════════════════════════════════════════ */
+    .pack-list { display:flex; flex-direction:column; gap:7px; }
+    .pack-item {
+      display:flex; align-items:center; gap:var(--sp-3);
+      padding:11px 14px;
+      background:rgba(255,255,255,0.017); border:1px solid rgba(255,255,255,0.038);
+      border-radius:var(--r-md); font-size:12.5px; color:rgba(245,240,232,0.58);
+    }
+    .pack-item-icon { width:30px; height:30px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+    .pack-item-icon--gold  { background:rgba(200,155,60,0.07); border:1px solid rgba(200,155,60,0.15); }
+    .pack-item-icon--green { background:rgba(74,222,128,0.05); border:1px solid rgba(74,222,128,0.12); }
+    .pack-item-body { flex:1; }
+    .pack-item-title { font-weight:600; color:var(--cream); font-size:14px; margin-bottom:2px; }
+    .pack-item-sub   { font-size:14px; color:rgba(245,240,232,0.36); line-height:1.48; }
+    .pack-item-highlight {
+      font-size:9px; font-weight:700; letter-spacing:0.10em; text-transform:uppercase;
+      color:var(--green); background:rgba(74,222,128,0.05);
+      border:1px solid rgba(74,222,128,0.13);
+      border-radius:var(--r-pill); padding:3px 9px; flex-shrink:0;
+    }
+
+    /* ══════════════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════════════ */
+    .faq-list { display:flex; flex-direction:column; gap:8px; }
+    .faq-item {
+      border:1px solid rgba(200,155,60,0.09);
+      border-radius:var(--r-md); overflow:hidden;
+      transition:border-color var(--t-mid) ease, background var(--t-mid) ease;
+    }
+    .faq-item:hover { border-color:rgba(200,155,60,0.18); }
+    .faq-item.open  { border-color:rgba(200,155,60,0.20); background:rgba(200,155,60,0.018); }
+    .faq-question {
+      width:100%; background:none; border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:15px 18px; gap:12px;
+      font-family:'DM Sans',sans-serif; font-size:14px; font-weight:600;
+      color:var(--cream); text-align:left;
+    }
+    .faq-chevron { flex-shrink:0; transition:transform var(--t-mid) var(--ease-out),color var(--t-mid) ease; color:rgba(200,155,60,0.42); }
+    .faq-item.open .faq-chevron { transform:rotate(180deg); color:rgba(200,155,60,0.72); }
+    .faq-answer { max-height:0; overflow:hidden; padding:0 18px; transition:max-height 0.34s var(--ease-out),padding 0.24s ease; }
+    .faq-item.open .faq-answer { max-height:240px; padding:0 18px 18px; }
+    .faq-answer p { font-size:14px; color:rgba(245,240,232,0.48); line-height:1.72; font-weight:300; }
+
+    /* Séparateur */
+    .section-sep { height:1px; background:linear-gradient(90deg,transparent,rgba(200,155,60,0.09),transparent); margin:var(--sp-2) 0; }
+
+    /* ══════════════════════════════════════════════
+       PHASE 3 — STICKY PRICING PANEL ELITE
+    ══════════════════════════════════════════════ */
+    .offre-card {
+      position:relative;
+      width:100%;
+      box-sizing:border-box;
+      background:rgba(6,12,28,0.90);
+      border:1px solid rgba(200,155,60,0.20);
+      border-radius:var(--r-xl); padding:var(--sp-7) var(--sp-8);
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.038) inset,
+        0 28px 80px rgba(0,0,0,0.48),
+        0 0 48px rgba(200,155,60,0.045);
+      animation: fadeInUp var(--t-slow) 0.18s var(--ease-out) both;
+    }
+    /* Filet gold haut */
+    .offre-card::before {
+      content:''; position:absolute; top:0; left:6%; right:6%; height:1px;
+      background:linear-gradient(90deg,
+        transparent, rgba(200,155,60,0.50) 30%,
+        rgba(240,200,85,0.95) 50%, rgba(200,155,60,0.50) 70%, transparent
+      );
+
+    }
+
+    .offre-card-label {
+      font-size:9px; font-weight:700;
+      letter-spacing:0.20em; text-transform:uppercase;
+      color:var(--gold); margin-bottom:var(--sp-6);
+      display:flex; align-items:center; gap:12px;
+    }
+    .offre-card-label::before { content:''; flex:1; height:1px; background:rgba(200,155,60,0.16); }
+
+    .offre-card-tagline {
+      font-size:17px; color:rgba(245,240,232,0.75);
+      margin-bottom:var(--sp-5);
+      line-height:1.75; font-weight:500; font-style:italic;
+      padding-bottom:var(--sp-5);
+      border-bottom:1px solid rgba(255,255,255,0.034);
+      letter-spacing:0.01em;
+    }
+
+    /* Prix */
+    .offre-price-row { display:flex; align-items:baseline; gap:14px; margin-bottom:var(--sp-2); }
+    .offre-price {
+      font-family:'Cormorant Garamond',serif;
+      font-size:52px; font-weight:300; line-height:1;
+      letter-spacing:-0.02em;
+      background:linear-gradient(175deg,#f5d67a 0%,#c9a84c 38%,#9a7428 100%);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+    .offre-price-old { font-size:19px; color:rgba(245,240,232,0.22); text-decoration:line-through; }
+    .offre-price-note { font-size:14px; color:rgba(245,240,232,0.72); margin-bottom:var(--sp-4); line-height:1.55; font-weight:500; }
+    .offre-price-note strong { color:var(--green); font-weight:700; }
+
+    .offre-price-breakdown {
+      font-size:13px; color:rgba(245,240,232,0.36);
+      margin-bottom:var(--sp-4); line-height:1.55;
+    }
+
+    /* Trust row supprimée — panel épuré */
+
+    /* Checklist — épurée */
+    .offre-card-includes {
+      display:flex; flex-direction:column; gap:14px;
+      margin-bottom:var(--sp-8);
+    }
+    .offre-card-include { display:flex; align-items:center; gap:10px; font-size:14px; color:rgba(245,240,232,0.58); line-height:1.6; }
+    .offre-card-include::before { content:'✓'; color:rgba(74,222,128,0.60); font-weight:600; font-size:13px; flex-shrink:0; }
+
+    /* CTA */
+    .offre-cta-wrap { margin-bottom:var(--sp-5); margin-top:var(--sp-3); }
+    .offre-cta {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      width:100%; padding:17px 32px; border-radius:var(--r-sm); border:none; cursor:pointer;
+      font-family:'DM Sans',sans-serif; font-size:14px; font-weight:700; letter-spacing:0.01em;
+      text-decoration:none;
+      background:linear-gradient(135deg,#f4e4a3 0%,#d4af37 55%,#b8962e 100%);
+      color:#161008;
+      box-shadow:0 1px 0 rgba(255,255,255,0.20) inset, 0 6px 28px rgba(180,130,20,0.28);
+      transition:transform var(--t-fast) var(--ease-out), box-shadow var(--t-fast) ease;
+      position:relative; overflow:hidden;
+    }
+    .offre-cta::after {
+      content:''; position:absolute; top:0; left:-100%;
+      width:55%; height:100%;
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,0.16),transparent);
+      transform:skewX(-20deg);
+    }
+    .offre-cta:hover { transform:translateY(-2px); box-shadow:0 1px 0 rgba(255,255,255,0.22) inset,0 8px 32px rgba(180,130,20,0.52); }
+    .offre-cta:hover::after { animation:sweep 0.52s ease; }
+    .offre-cta:active { transform:translateY(0); }
+
+    .offre-cta--secondary {
+      background:rgba(200,155,60,0.07); color:var(--gold-pale);
+      border:1px solid rgba(200,155,60,0.18); box-shadow:none; animation:none;
+    }
+    .offre-cta--secondary::after { display:none; }
+    .offre-cta--secondary:hover { background:rgba(200,155,60,0.11); box-shadow:0 4px 16px rgba(0,0,0,0.16); }
+
+    /* Messages état */
+    .offre-premium-status {
+      padding:10px 14px; background:rgba(74,222,128,0.04);
+      border:1px solid rgba(74,222,128,0.11); border-radius:var(--r-sm);
+      margin-bottom:var(--sp-4); font-size:11.5px; color:rgba(74,222,128,0.65);
+      line-height:1.55; text-align:center;
+    }
+    /*.offre-free-nudge {
+      margin-bottom:var(--sp-4); font-size:12px; color:rgba(245,240,232,0.42);
+      line-height:1.65; text-align:center; letter-spacing:0.01em;
+    }
+    .offre-free-nudge strong { color:rgba(200,155,60,0.65); font-weight:500; }*/
+
+    .offre-guarantee {
+      text-align:center; font-size:12px; color:rgba(245,240,232,0.30);
+      line-height:1.65; margin-top:var(--sp-3);
+    }
+    .offre-guarantee a { color:rgba(200,155,60,0.55); text-decoration:none; transition:color var(--t-fast) ease; }
+    .offre-guarantee a:hover { color:var(--gold); }
+
+    /* ══════════════════════════════════════════════
+       PHASE 5 — MOBILE PREMIUM
+       CTA flottant — remplace le sticky panel desktop
+    ══════════════════════════════════════════════ */
+
+    /* Mobile floating CTA — masqué sur desktop */
+    .mobile-cta-bar {
+      display:none;
+    }
+
+    @media(max-width:900px){
+      .mobile-cta-bar {
+        display:flex;
+        position:fixed; bottom:0; left:0; right:0; z-index:800;
+        height:var(--mobile-cta-height);
+        align-items:center; gap:var(--sp-4);
+        padding:0 var(--sp-5);
+        background:rgba(4,8,18,0.98);
+        border-top:1px solid rgba(200,155,60,0.16);
+        box-shadow:0 -8px 32px rgba(0,0,0,0.40);
+        animation:slideUp 0.45s var(--ease-out) 0.80s both;
+      }
+      .mobile-cta-info { flex:1; }
+      .mobile-cta-price {
+        font-family:'Cormorant Garamond',serif;
+        font-size:26px; font-weight:300; line-height:1;
+        background:linear-gradient(175deg,#f5d67a,#c9a84c 40%,#9a7428);
+        -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+        background-clip:text;
+        letter-spacing:-0.01em;
+      }
+      .mobile-cta-note { font-size:10px; color:rgba(245,240,232,0.30); letter-spacing:0.05em; margin-top:2px; }
+      .mobile-cta-btn {
+        display:inline-flex; align-items:center; justify-content:center;
+        padding:11px 22px; border-radius:var(--r-sm);
+        font-family:'DM Sans',sans-serif; font-size:12.5px; font-weight:700;
+        text-decoration:none;
+        background:linear-gradient(135deg,#f4e4a3,#d4af37 55%,#b8962e);
+        color:#161008; white-space:nowrap;
+        box-shadow:0 3px 16px rgba(180,130,20,0.38);
+        transition:transform var(--t-fast) var(--ease-out);
+      }
+      .mobile-cta-btn:hover { transform:scale(1.02); }
+      .mobile-cta-btn--secondary {
+        background:rgba(200,155,60,0.08); color:var(--gold-pale);
+        border:1px solid rgba(200,155,60,0.20); box-shadow:none; animation:none;
+      }
+    }
+
+    /* ── Ajustements blocs sur mobile ── */
+    @media(max-width:900px){
+      .offre-page {
+      position:relative; z-index:2;
+      padding: calc(var(--nav-height) + 80px) 40px 140px;
+      box-sizing:border-box;
+    }
+      .offre-header { margin-bottom:0; text-align:center; }
+      .offre-subtitle { margin:0 auto var(--sp-5); }
+      .offre-title { font-size:clamp(28px,7vw,40px); }
+      .offre-subtitle { font-size:14px; max-width:100%; }
+      .hero-stats { gap:var(--sp-5); padding:13px 24px; flex-wrap:wrap; justify-content:center; }
+      .offre-block { padding:20px 18px; }
+      .offre-block-title { font-size:30px; }
+      .hero-scroll-hint { display:none; }
+    }
+
+    @media(max-width:768px){
+      .offre-block-title,
+      .roadmap-block-title { font-size:30px; }
+      .offre-block-subtitle,
+      .roadmap-block-subtitle { font-size:17px; }
+      .tl-name { font-size:24px !important; }
+      .tl-item[data-level="1"] .tl-name,
+      .tl-item[data-level="2"] .tl-name,
+      .tl-item[data-level="3"] .tl-name,
+      .tl-item[data-level="4"] .tl-name,
+      .tl-item[data-level="5"] .tl-name,
+      .tl-item[data-level="6"] .tl-name { font-size:24px !important; }
+      .tl-desc { font-size:16px !important; }
+      .tl-item[data-level="1"] .tl-desc,
+      .tl-item[data-level="6"] .tl-desc { font-size:16px !important; }
+      .transfo-item,
+      .included-item span,
+      .pack-item-sub,
+      .faq-answer p,
+      .offre-card-include { font-size:15px; }
+      .faq-question { font-size:17px; }
+    }
+
+    @media(max-width:600px){
+      .offre-page { padding-top:calc(var(--nav-height) + 36px); }
+      .offre-title { font-size:clamp(26px,8vw,34px); margin-bottom:14px; }
+      .offre-subtitle { font-size:13.5px; }
+      .hero-stats { gap:14px; padding:11px 20px; }
+      .hero-stat-val { font-size:19px; }
+      .hero-stat-lbl { font-size:8.5px; }
+      .offre-block { padding:17px 15px; border-radius:var(--r-md); }
+      .offre-block-title { font-size:17px; }
+      .transformation-grid { grid-template-columns:1fr; }
+      .faq-question { padding:15px; min-height:50px; }
+      .included-item { padding:10px 11px; }
+    }
+
+    @media(max-width:380px){
+      .hero-stats { flex-direction:column; gap:10px; border-radius:var(--r-xl); padding:14px 20px; }
+      .hero-stat-sep { width:40px; height:1px; }
+    }
+
+    /* ══════════════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════════════ */
+    footer {
+      position:relative; z-index:2;
+      text-align:center; padding:36px 40px;
+      color:rgba(245,240,232,0.14); font-size:10.5px;
+      letter-spacing:0.09em; margin-top:80px;
+      border-top:1px solid rgba(200,155,60,0.05);
+    }
+
+
+    /* ══════════════════════════════════════════════
+       SECTION FONDATRICE
+    ══════════════════════════════════════════════ */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: var(--sp-9);
+      align-items: start;
+    }
+    @media(max-width: 768px) {
+      .founder-grid { grid-template-columns: 1fr; gap: var(--sp-7); }
+    }
+
+    /* Photo placeholder */
+    .founder-photo-wrap { margin-bottom: var(--sp-5); }
+    .founder-photo-placeholder {
+      width: 160px; height: 160px;
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(200,155,60,0.12);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.20);
+    }
+    .founder-photo-placeholder img {
+      width: 100%; height: 100%;
+      object-fit: cover; border-radius: var(--r-lg);
+    }
+
+    /* Badges */
+    .founder-badges { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .founder-badge {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(200,155,60,0.72);
+      background: rgba(200,155,60,0.05);
+      border: 1px solid rgba(200,155,60,0.15);
+      border-radius: var(--r-pill);
+      padding: 5px 12px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* Texte */
+    .founder-text {
+      font-size: 14px; color: rgba(245,240,232,0.56);
+      line-height: 1.80; font-weight: 300;
+      margin-bottom: var(--sp-4);
+    }
+
+    /* 3 cartes */
+    .founder-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-3);
+      margin-top: var(--sp-7);
+    }
+    @media(max-width: 768px) { .founder-cards { grid-template-columns: 1fr; } }
+
+    .founder-card {
+      background: rgba(255,255,255,0.017);
+      border: 1px solid rgba(200,155,60,0.10);
+      border-radius: var(--r-md);
+      padding: var(--sp-5) var(--sp-5);
+      position: relative;
+    }
+    .founder-card::before {
+      content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,155,60,0.28) 50%, transparent);
+    }
+    .founder-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; font-weight: 600;
+      color: var(--cream); margin-bottom: var(--sp-2);
+      letter-spacing: -0.01em;
+    }
+    .founder-card-text {
+      font-size: 13px; color: rgba(245,240,232,0.46);
+      line-height: 1.65; font-weight: 300;
+    }
+
+    /* Citation interne */
+    .founder-quote {
+      border-top: 1px solid rgba(200,155,60,0.08);
+      padding-top: var(--sp-7);
+      margin-top: var(--sp-2);
+      text-align: center;
+    }
+    .founder-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(17px, 1.6vw, 22px);
+      font-style: italic; font-weight: 300;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.65; letter-spacing: -0.01em;
+    }
+
+  </style>
 </head>
 
 <body>
 
-<!-- NAV -->
+<!-- ══════════ NAV ══════════ -->
 <nav>
-  <div class="nav-logo">
-    <img src="Logo/logo.png" alt="Logo Académie Trading Algorithmique" class="logo">
+  <a href="{% url 'index' %}" class="nav-logo">
+    <img src="{% static 'images/logo_transp.png' %}" alt="Académie Trading">
     <span class="nav-brand">Académie de Trading Algorithmique</span>
+  </a>
+  <div class="nav-right">
+    {% if user.is_authenticated %}
+      <a href="{% url 'dashboard' %}" class="btn-nav">← Ma formation</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn-nav">Connexion</a>
+    {% endif %}
   </div>
-  <ul class="nav-links" id="nav-links">
-    <li><a href="#resultats">Résultats</a></li>
-    <li><a href="#formations">Formation</a></li>
-    <li><a href="#programme">Programme</a></li>
-    <li><a href="#about">À propos</a></li>
-  </ul>
-  <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
+<!-- ══════════════════════════════════════════════
+     PHASE 5 — MOBILE FLOATING CTA BAR
+     Visible uniquement ≤900px
+     Remplace le sticky panel desktop
+══════════════════════════════════════════════ -->
+<div class="mobile-cta-bar">
+  <div class="mobile-cta-info">
+    <div class="mobile-cta-price">990€</div>
+    <div class="mobile-cta-note">Paiement unique · accès à vie</div>
+  </div>
+  {% if user.is_authenticated %}
+    {% if user.profil.has_premium %}
+      <a href="{% url 'dashboard' %}" class="mobile-cta-btn mobile-cta-btn--secondary">
+        Ma formation →
+      </a>
+    {% else %}
+      <a href="{% url 'checkout' %}" class="mobile-cta-btn">
+        Commencez le parcours
+      </a>
+    {% endif %}
+  {% else %}
+    <a href="{% url 'signup' %}" class="mobile-cta-btn">
+      Commencez le parcours
+    </a>
+  {% endif %}
+</div>
 
+<!-- ══════════ PAGE ══════════ -->
+<div class="offre-page">
+  <div class="offre-inner">
 
-<!-- <header>
-  <div class="hero-glow-gold"></div>
-  <div class="hero-glow-blue"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Niveau 1 entièrement gratuit</div>
-      <img src="Logo/logo_transp.png" alt="Logo Académie Trading Algorithmique" class="hero-logo">
-      <h1>
-        Faites fructifier votre<br>
-        <span class="gold" style="display:inline;">argent</span>
-        <span class="small" style="display:block; margin-top:30px;">grâce au trading algorithmique</span>
+    <!-- ═══════════════════════════════════
+         GRID PRINCIPALE
+    ═══════════════════════════════════ -->
+    <div class="offre-grid">
+
+      <!-- ═ COLONNE GAUCHE ═ -->
+      <div class="offre-left">
+
+        <!-- ── HERO ── -->
+        <div class="offre-header">
+
+<!-- Grid quantitative SVG — plus diffuse, moins uniforme -->
+      <svg class="hero-grid-bg" viewBox="0 0 580 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <mask id="fadeMask">
+            <rect width="580" height="240" fill="white"/>
+            <!-- Fade horizontal -->
+            <rect width="580" height="240" fill="url(#fH)"/>
+            <!-- Fade vertical -->
+            <rect width="580" height="240" fill="url(#fV)"/>
+          </mask>
+          <!-- Fade horizontal -->
+          <linearGradient id="fH" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%"   stop-color="black" stop-opacity="1"/>
+            <stop offset="22%"  stop-color="black" stop-opacity="0"/>
+            <stop offset="78%"  stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="1"/>
+          </linearGradient>
+          <!-- Fade vertical -->
+          <linearGradient id="fV" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%"  stop-color="black" stop-opacity="1"/>
+            <stop offset="15%" stop-color="black" stop-opacity="0"/>
+            <stop offset="75%" stop-color="black" stop-opacity="0"/>
+            <stop offset="100%" stop-color="black" stop-opacity="1"/>
+          </linearGradient>
+        </defs>
+
+        <g mask="url(#fadeMask)">
+
+        <!-- Grille irrégulière — pas uniforme, institutionnelle -->
+        <!-- H lines — opacités variables -->
+        <line x1="0" y1="48"  x2="580" y2="48"  stroke="rgba(200,155,60,0.22)" stroke-width="0.5"/>
+        <line x1="0" y1="96"  x2="580" y2="96"  stroke="rgba(200,155,60,0.30)" stroke-width="0.5"/>
+        <line x1="0" y1="144" x2="580" y2="144" stroke="rgba(200,155,60,0.20)" stroke-width="0.5"/>
+        <line x1="0" y1="192" x2="580" y2="192" stroke="rgba(200,155,60,0.12)" stroke-width="0.5"/>
+        <!-- H lines secondaires — très légères -->
+        <line x1="0" y1="24"  x2="580" y2="24"  stroke="rgba(200,155,60,0.08)" stroke-width="0.4" stroke-dasharray="4 8"/>
+        <line x1="0" y1="168" x2="580" y2="168" stroke="rgba(200,155,60,0.07)" stroke-width="0.4" stroke-dasharray="4 8"/>
+
+        <!-- V lines — espacements irréguliers -->
+        <line x1="72"  y1="0" x2="72"  y2="240" stroke="rgba(200,155,60,0.09)" stroke-width="0.5"/>
+        <line x1="165" y1="0" x2="165" y2="240" stroke="rgba(200,155,60,0.08)" stroke-width="0.5"/>
+        <line x1="290" y1="0" x2="290" y2="240" stroke="rgba(200,155,60,0.14)" stroke-width="0.5"/>
+        <line x1="415" y1="0" x2="415" y2="240" stroke="rgba(200,155,60,0.08)" stroke-width="0.5"/>
+        <line x1="508" y1="0" x2="508" y2="240" stroke="rgba(200,155,60,0.09)" stroke-width="0.5"/>
+
+        <!-- Courbe signal irrégulière — plus réaliste -->
+        <path d="M0,120 C60,120 90,60 165,72 S240,144 290,96 S380,48 415,80 S500,130 580,110"
+              stroke="rgba(200,155,60,0.25)" stroke-width="1" fill="none" stroke-linejoin="round"/>
+        <!-- Courbe secondaire — plus légère -->
+        <path d="M0,160 C80,155 130,130 200,140 S310,170 380,145 S480,120 580,135"
+              stroke="rgba(200,155,60,0.10)" stroke-width="0.7" fill="none" stroke-dasharray="6 10"/>
+
+        <!-- Nœuds — tailles variables selon importance -->
+        <circle cx="165" cy="72"  r="2"   fill="rgba(200,155,60,0.28)"/>
+        <circle cx="290" cy="96"  r="3"   fill="rgba(240,200,85,0.42)"/>
+        <circle cx="415" cy="80"  r="2"   fill="rgba(200,155,60,0.28)"/>
+        <circle cx="72"  cy="108" r="1.5" fill="rgba(200,155,60,0.20)"/>
+        <circle cx="508" cy="110" r="1.5" fill="rgba(200,155,60,0.20)"/>
+
+        <!-- Croix sur nœud central — signal quant -->
+        <line x1="287" y1="96" x2="293" y2="96" stroke="rgba(240,200,85,0.55)" stroke-width="0.8"/>
+        <line x1="290" y1="93" x2="290" y2="99" stroke="rgba(240,200,85,0.55)" stroke-width="0.8"/>
+
+        </g>
+      </svg>
+
+      <!-- Badge -->
+      <div class="offre-badge">
+        <span class="offre-badge-dot"></span>
+        Parcours quantitatif · 6 niveaux
+      </div>
+
+      <!-- Titre -->
+      <h1 class="offre-title">
+        Du trading intuitif<br>au <em>trading quantitatif</em>
       </h1>
 
-
-    POUR QUI — visible dès le hero
-    <div class="hero-for-who reveal">
-      <p class="hero-for-who-label">POUR QUI?</p>
-      <div class="hero-for-who-list">
-        <div class="for-who-item">
-          <span class="for-who-check">✓</span>
-          <span>Vous souhaitez faire fructifier votre argent mais vous n'êtes ni trader ni développeur</span>
-        </div>
-        <div class="for-who-item">
-          <span class="for-who-check">✓</span>
-          <span>Vous débutez sur les marchés financiers et voulez une formation sérieuse</span>
-        </div>
-        <div class="for-who-item">
-          <span class="for-who-check">✓</span>
-          <span>Vous investissez déjà et voulez automatiser vos stratégies</span>
-        </div>
-        <div class="for-who-item">
-          <span class="for-who-check">✓</span>
-          <span>Vous êtes lassé par les promesses des systèmes magiques</span>
-        </div>
-        
-      </div>
-    </div>
-
-
-
-    <div class="hero-cta-row">
-      <a href="#formations" class="btn-primary">Commencer gratuitement →</a>
-      <a href="#programme" class="btn-ghost">Voir le programme</a>
-    </div>
-    <p style="font-size: 12px; color: var(--white-dim); opacity: 0.5; margin-top: 16px; letter-spacing: 0.08em;">
-      ✦ Accès immédiat · Sans carte bancaire · Sans engagement
-    </p>
-  </div>
-</header> -->
-
-
-
-
-<header>
-  <div class="hero-glow-gold"></div>
-  <div class="hero-glow-blue"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Niveau 1 entièrement gratuit</div>
-    <img src="Logo/logo_transp.png" alt="Logo Académie Trading Algorithmique" class="hero-logo">
-
-    <div class="hero-split">
-
-      <!-- COLONNE GAUCHE — titre -->
-      <div class="hero-left">
-        <h1>
-          Faites fructifier votre<br>
-          <span class="gold" style="display:inline;">argent</span>
-          <span class="small" style="display:block; margin-top:12px;">grâce au trading algorithmique</span>
-        </h1>
-        <div class="hero-cta-row">
-          <a href="#formations" class="btn-primary">Commencer gratuitement →</a>
-          <a href="#programme" class="btn-ghost">Voir le programme</a>
-        </div>
-        <p style="font-size: 12px; color: var(--white-dim); opacity: 0.5; margin-top: 16px; letter-spacing: 0.08em;">
-          ✦ Accès immédiat · Sans carte bancaire · Sans engagement
-        </p>
-      </div>
-
-      <!-- COLONNE DROITE — pour qui -->
-      <div class="hero-right">
-        <div class="hero-for-who">
-          <p class="hero-for-who-label">POUR QUI ?</p>
-          <div class="hero-for-who-list">
-            <div class="for-who-item">
-              <span class="for-who-check">✓</span>
-              <span>Vous souhaitez faire fructifier votre argent mais vous n'êtes ni trader ni développeur</span>
-            </div>
-            <div class="for-who-item">
-              <span class="for-who-check">✓</span>
-              <span>Vous débutez sur les marchés financiers et voulez une formation sérieuse</span>
-            </div>
-            <div class="for-who-item">
-              <span class="for-who-check">✓</span>
-              <span>Vous investissez déjà et voulez automatiser vos stratégies</span>
-            </div>
-            <div class="for-who-item">
-              <span class="for-who-check">✓</span>
-              <span>Vous êtes lassé par les promesses des systèmes magiques</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</header>
-
-
-<!-- Citation mise en avant -->
-<div class="quote-divider">
-  <blockquote class="about-quote">
-    "La différence entre un expert et un débutant?<br>
-    Simplement une méthode qu'on ne lui a pas encore expliquée."
-  </blockquote>
-</div>
-
-
-
-<!-- VIDÉO DE PRÉSENTATION -->
-<section class="video-section">
-  <div class="video-inner reveal">
-    <p class="section-tag" style="text-align:center; margin-bottom: 12px;">Présentation</p>
-    <h2 class="section-title" style="text-align:center; margin-bottom: 32px;">
-      Ce que vous allez <em>apprendre</em><br>
-    </h2>
-
-
-    <!-- Option B : vidéo locale (remplace video.mp4 par ton fichier) -->
-    <div class="video-wrapper">
-      <video controls poster="Images/equity_curve.png">
-        <source src="Images/presentation.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
-    </div>
-
-    <p class="video-caption">
-      Une présentation de ce que vous allez apprendre — sans jargon, sans promesses excessives.
-    </p>
-  </div>
-</section>
-
-
-
-
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat-item reveal">
-      <div class="stat-num">3</div>
-      <div class="stat-label">Niveaux de formation</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num">100%</div>
-      <div class="stat-label">Code source inclus</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num">498€</div>
-      <div class="stat-label">Pack complet — promo</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num">∞</div>
-      <div class="stat-label">Accès à vie</div>
-    </div>
-    <div class="stat-item reveal">
-      <div class="stat-num">5 ans</div>
-      <div class="stat-label">De données backtestées</div>
-    </div>
-  </div>
-</div>
-
-
-
-
-<!-- Citation mise en avant -->
-<div class="quote-divider">
-  <blockquote class="about-quote">
-    "Celui qui programme sa stratégie ne dépend de personne."
-  </blockquote>
-</div>
-
-
-
-
-
-<!-- POURQUOI APPRENDRE À CODER -->
-<section class="section">
-  <div class="reveal">
-    <p class="section-tag">Pourquoi apprendre ?</p>
-    <h2 class="section-title">Construire votre stratégie<br><em>plutôt que l'acheter</em></h2>
-    <p class="section-desc">
-      Des robots de trading, il en existe des milliers. Mais celui qui comprend 
-      ce qu'il fait aura toujours un avantage sur celui qui suit aveuglément un algorithme qu'il n'a pas créé.
-    </p>
-    <div class="gold-rule"></div>
-  </div>
-
-  <div class="why-code-grid reveal">
-
-    <div class="why-code-card">
-      <div class="why-code-header">
-        <div class="why-code-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="3" y="11" width="18" height="11" rx="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <div class="why-code-title">Gratuit pour toujours</div>
-      </div>
-      <p class="why-code-desc">Aucun abonnement, aucune licence. Une fois appris, cet outil vous appartient — pour toujours.</p>
-    </div>
-
-    <div class="why-code-card">
-      <div class="why-code-header">
-        <div class="why-code-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 8v4l3 3"/>
-          </svg>
-        </div>
-        <div class="why-code-title">Vous êtes autonome</div>
-      </div>
-      <p class="why-code-desc">Pas de dépendance à un logiciel propriétaire qui peut fermer, changer de prix ou disparaître du jour au lendemain.</p>
-    </div>
-
-    <div class="why-code-card">
-      <div class="why-code-header">
-        <div class="why-code-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <polyline points="16 18 22 12 16 6"/>
-            <polyline points="8 6 2 12 8 18"/>
-          </svg>
-        </div>
-        <div class="why-code-title">Vos stratégies vous appartiennent</div>
-      </div>
-      <p class="why-code-desc">Vous comprenez chaque décision de votre algorithme. Vous pouvez l'adapter, l'améliorer, le personnaliser à l'infini.</p>
-    </div>
-
-    <div class="why-code-card">
-      <div class="why-code-header">
-        <div class="why-code-icon">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <line x1="8" y1="21" x2="16" y2="21"/>
-            <line x1="12" y1="17" x2="12" y2="21"/>
-          </svg>
-        </div>
-        <div class="why-code-title">Portable et universel</div>
-      </div>
-      <p class="why-code-desc">Fonctionne sur n'importe quel ordinateur, avec n'importe quel broker. Aucune contrainte technique.</p>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- RÉSULTATS RÉELS -->
-<section id="resultats" class="section results-section"> 
-  <div class="reveal">
-    <p class="section-tag">Preuve par les chiffres</p>
-    <h2 class="section-title">Une stratégie réelle,<br><em>testée sur 5 ans de données</em></h2>
-    <p class="section-desc">
-      Voici un exemple concret de ce que vous apprendrez à construire — une stratégie sur le SP500, 
-      testée sur 5 ans de données réelles. Pas de simulation théorique : des résultats mesurables, 
-      que vous saurez reproduire et interpréter.
-    </p>
-    <div class="gold-rule"></div>
-  </div>
-
-  <!-- MÉTRIQUES -->
-  <div class="results-metrics reveal">
-    <div class="metric-card">
-      <div class="metric-value">6/10</div>
-      <div class="metric-label">Trades gagnants</div>
-      <div class="metric-sub">6 fois sur 10, la stratégie est dans le bon sens</div>
-    </div>
-    <div class="metric-card metric-card--highlight">
-      <div class="metric-value">×2</div>
-      <div class="metric-label">Gains vs Pertes</div>
-      <div class="metric-sub">Pour 1€ perdu, la stratégie en gagne 2</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-value">94</div>
-      <div class="metric-label">Trades sur 5 ans</div>
-      <div class="metric-sub">Un résultat statistiquement solide</div>
-    </div>
-    <div class="metric-card">
-      <div class="metric-value">&lt;3%</div>
-      <div class="metric-label">Perte maximale</div>
-      <div class="metric-sub">Le capital est protégé à tout moment</div>
-    </div>
-  </div>
-
-  <!-- GRAPHIQUES -->
-  <div class="carousel reveal">
-    <div class="carousel-track" id="carouselTrack">
-
-      <div class="chart-card carousel-slide">
-        <div class="chart-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
-          Évolution des gains sur 5 ans
-        </div>
-        <img src="Images/equity_curve.png" alt="Equity curve SP500" class="chart-img">
-        <p class="chart-caption">La courbe monte régulièrement sur 5 ans — sans accident majeur. C'est exactement ce que l'on cherche : une progression stable, pas un coup de chance.</p>
-      </div>
-
-      <div class="chart-card carousel-slide">
-        <div class="chart-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
-          Trouver les meilleurs réglages
-        </div>
-        <img src="Images/heatmap.png" alt="Heatmap TP SL optimisation" class="chart-img">
-        <p class="chart-caption">Ce graphique montre comment tester toutes les combinaisons possibles pour trouver les réglages optimaux. Vous apprendrez à le générer vous-même.</p>
-      </div>
-
-      <div class="chart-card carousel-slide">
-        <div class="chart-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="4" height="18"/><rect x="10" y="8" width="4" height="13"/><rect x="18" y="5" width="4" height="16"/></svg>
-          Résultat de chaque trade
-        </div>
-        <img src="Images/distribution.png" alt="Distribution PnL trades" class="chart-img">
-        <p class="chart-caption">La majorité des trades sont positifs — c'est le signe d'une stratégie cohérente, pas d'un hasard chanceux.</p>
-      </div>
-
-      <div class="chart-card carousel-slide">
-        <div class="chart-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Combien de temps rester dans un trade ?
-        </div>
-        <img src="Images/duree.png" alt="Analyse durée trade" class="chart-img">
-        <p class="chart-caption">La stratégie performe mieux sur des trades courts — autour de 60 minutes. Vous apprendrez à trouver cette durée optimale par vous-même.</p>
-      </div>
-
-    </div>
-
-    <!-- Contrôles -->
-    <div class="carousel-controls">
-      <button class="carousel-btn" onclick="moveCarousel(-1)">←</button>
-      <div class="carousel-dots" id="carouselDots">
-        <span class="carousel-dot active" onclick="goToSlide(0)"></span>
-        <span class="carousel-dot" onclick="goToSlide(1)"></span>
-        <span class="carousel-dot" onclick="goToSlide(2)"></span>
-        <span class="carousel-dot" onclick="goToSlide(3)"></span>
-      </div>
-      <button class="carousel-btn" onclick="moveCarousel(1)">→</button>
-    </div>
-  </div>
-
-  <div class="results-disclaimer reveal">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
-    </svg>
-    Ces résultats sont issus de backtests sur données historiques et fournis à titre éducatif. Les performances passées ne garantissent pas les résultats futurs.
-  </div>
-</section>
-
-
-
-<!-- Citation mise en avant -->
-<div class="quote-divider">
-  <blockquote class="about-quote">
-    "Un algorithme ne panique jamais, ne doute jamais.
-  </blockquote>
-</div>
-
-
-
-<!-- INCLUS DANS LA FORMATION -->
-<section class="section deliverables-section">
-  <div class="reveal">
-    <p class="section-tag">Inclus dans la formation</p>
-    <h2 class="section-title">Tout ce qu'il vous faut pour <em>réussir</em></h2>
-    <div class="gold-rule"></div>
-  </div>
-  <div class="deliverables-grid">
-
-    <div class="deliverable deliverable-highlight reveal">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
-          <path d="M6 12v5c3 3 9 3 12 0v-5"/>
-        </svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">
-          <span class="unique-tag" style="margin-right:8px; vertical-align:middle;">EXPERT</span>
-          Une pédagogie universitaire
-        </div>
-        <p class="deliverable-desc">Conçue par une docteure en mathématiques avec 14 ans d'enseignement — chaque concept est expliqué simplement, sans raccourci, sans jargon inutile.</p>
-      </div>
-    </div>
-
-    <div class="deliverable deliverable-highlight reveal">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-        </svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">
-          <span class="unique-tag" style="margin-right:8px; vertical-align:middle;">UNIQUE</span>
-          Assistance intégrée à chaque leçon
-        </div>
-        <p class="deliverable-desc">Bloqué sur un exercice ? Posez votre question directement sous la leçon et obtenez une réponse rapidement.</p>
-      </div>
-    </div>
-
-    <div class="deliverable reveal" style="transition-delay:0.1s">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">Code source des stratégies</div>
-        <p class="deliverable-desc">Tout le code enseigné dans la formation, commenté ligne par ligne pour que vous compreniez chaque décision.</p>
-      </div>
-    </div>
-
-    <div class="deliverable reveal" style="transition-delay:0.2s">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">Modèles prêts à l'emploi</div>
-        <p class="deliverable-desc">Des fichiers pré-structurés pour créer vos propres stratégies sans repartir d'une page blanche.</p>
-      </div>
-    </div>
-
-    <div class="deliverable reveal" style="transition-delay:0.3s">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">Accès à vie + mises à jour</div>
-        <p class="deliverable-desc">Le contenu évolue avec les marchés. Vous accédez à toutes les mises à jour sans surcoût.</p>
-      </div>
-    </div>
-
-    <div class="deliverable reveal" style="transition-delay:0.4s">
-      <div class="deliverable-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      </div>
-      <div class="deliverable-body">
-        <div class="deliverable-title">Avancez à votre rythme</div>
-        <p class="deliverable-desc">Pas de planning imposé. Vous accédez au contenu quand vous voulez, depuis n'importe où.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-
-<!-- FORMATIONS -->
-<section id="formations" class="section">
-  <div class="reveal">
-    <p class="section-tag">La formation</p>
-    <h2 class="section-title">3 niveaux,<br><em>un seul objectif</em></h2>
-    <p class="section-desc">
-      Chaque module est conçu pour être autonome ou s'intégrer dans un parcours complet, du premier script à la stratégie institutionnelle.
-    </p>
-  </div>
-  <div class="cards-grid">
-
-
-    <div class="card card-free reveal">
-      <div class="card-level level-free">● Niveau 1</div>
-      <div class="card-title">Introduction au Trading Algorithmique</div>
-      <p class="card-desc">Installez votre environnement de travail, récupérez vos premières données de marché, et créez votre tout premier script de trading.</p>
-        <ul class="card-features">
-        <li>Environnement Python installé pas à pas</li>
-        <li>Vos premières données boursières en quelques lignes</li>
-        <li>Une stratégie simple de A à Z, code inclus</li>
-      </ul>
-      <a href="#" class="btn-primary" style="margin-top: 24px; display: inline-block; width: 100%; text-align: center;">
-        Accéder gratuitement au niveau 1 →
-      </a>
-    </div>
-
-
-    <div class="card reveal" style="transition-delay:0.1s">
-      <div class="card-level level-blue">● Niveau 2</div>
-      <div class="card-title">Backtesting Professionnel</div>
-      <p class="card-desc">Construisez un moteur de backtest robuste, optimisez vos paramètres, et interprétez les métriques pro.</p>
-      <ul class="card-features">
-        <li>Simulez vos trades sur des années de données réelles</li>
-        <li>Optimisation des paramètres sans tricher sur les données</li>
-        <li>Indicateurs de performance pour valider votre stratégie</li>
-      </ul>
-    </div>
-
-
-
-  <div class="card reveal" style="transition-delay:0.2s">
-    <div class="card-level level-gold">● Niveau 3</div>
-    <div class="card-title">Macro &amp; Approche Institutionnelle</div>
-    <p class="card-desc">Intégrez les données macro-économiques et adaptez vos stratégies aux régimes de marché changeants.</p>
-    <ul class="card-features">
-      <li>Données macro-économiques intégrées</li>
-      <li>Adapter votre stratégie selon le contexte économique</li>
-      <li>La méthode utilisée par les fonds professionnels — simplifiée</li>
-    </ul>
-    <div class="card-bonus">
-      <span class="bonus-tag">BONUS</span>
-      <span>Une stratégie complète sur le SP500 backtestée sur 5 ans — code inclus</span>
-    </div>
-  </div>
-
-    <div class="card card-pack reveal" id="offre">
-      <div>
-        <div class="card-level level-gold">★ Pack Complet</div>
-        <div class="card-title">Accès Total — Les 3 Niveaux</div>
-        <p class="card-desc">Tout le contenu, tous les codes sources. Le parcours complet à prix exceptionnel.</p>
-        <ul class="card-features">
-          <li>Accès immédiat aux 3 niveaux</li>
-          <li>Code source téléchargeable</li>
-          <li>Modèles de stratégies prêts à l'emploi</li>
-          <li>Mises à jour incluses</li>
-          <li>
-            <span class="unique-tag" style="margin-right:6px; vertical-align:middle; font-size:9px;">UNIQUE</span>
-            Assistance intégrée à chaque leçon
-          </li>
-          <li>
-              <span class="bonus-tag">BONUS</span>
-              <span>Une stratégie complète sur le SP500</span>
-          </li>
-
-        </ul>
-      </div>
-      <div class="pack-price-block">
-        <div class="pack-old-price">1000€</div>
-        <div class="pack-price"><sub>€</sub>498</div>
-        <div class="pack-savings">Économisez 502€</div>
-        <a href="#" class="btn-primary" style="margin-top:20px;display:inline-block">S'inscrire</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-
-<!-- Citation mise en avant -->
-<div class="quote-divider">
-  <blockquote class="about-quote">
-    "Mon objectif : rendre le trading algorithmique accessible à tous"
-  </blockquote>
-</div>
-
-
-
-
-
-
-
-<!-- PROGRAMME -->
-<section id="programme" class="section">
-  <div class="reveal">
-    <p class="section-tag">Parcours</p>
-    <h2 class="section-title">Ce que vous <em>maîtriserez</em></h2>
-    <p class="section-desc">Un parcours structuré qui vous emmène de zéro à des stratégies dignes d'un fonds quantitatif.</p>
-    <div class="gold-rule"></div>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-dot">1</div>
-      <div class="timeline-body">
-        <div class="timeline-title">Fondations en programmation &amp; Marchés</div>
-        <p class="timeline-text">Installez le langage de programmation Python en quelques clics et récupérez vos premières données boursières. Vous verrez votre premier graphique de marché généré par votre propre code dès le premier module.</p>
-      </div>
-    </div>
-    <div class="timeline-item reveal" style="transition-delay:0.1s">
-      <div class="timeline-dot">2</div>
-      <div class="timeline-body">
-        <div class="timeline-title">Construction du Moteur de Backtest</div>
-        <p class="timeline-text">Construisez un système qui simule vos trades comme s'ils étaient réels — avec les frais, les délais et les conditions de marché authentiques. Pas de raccourci, pas de biais.</p>
-      </div>
-    </div>
-    <div class="timeline-item reveal" style="transition-delay:0.2s">
-      <div class="timeline-dot">3</div>
-      <div class="timeline-body">
-        <div class="timeline-title">Métriques &amp; Optimisation</div>
-        <p class="timeline-text">Apprenez à lire les résultats de votre stratégie comme un professionnel : est-ce que ça marche vraiment, ou juste par chance ? Vous saurez répondre à cette question avec précision.</p>
-      </div>
-    </div>
-    <div class="timeline-item reveal" style="transition-delay:0.3s">
-      <div class="timeline-dot">4</div>
-      <div class="timeline-body">
-        <div class="timeline-title">Intégration des données Macro-économiques</div>
-        <p class="timeline-text">Comprenez ce qui fait bouger les marchés pour prendre de meilleures décisions. Apprenez à intégrer les données économiques dans vos stratégies (taux d'intérêt, inflation, chômage, etc...). </p>      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-<!-- Citation mise en avant -->
-<div class="quote-divider">
-  <blockquote class="about-quote">
-    "Investissez comme un professionnel"
-  </blockquote>
-</div>
-
-
-
-
-
-<!-- QUI SUIS-JE -->
-<section class="section about-section about-bg" id="about">
-  <div class="reveal">
-    <p class="section-tag">Votre formateur</p>
-    <h2 class="section-title">Une expertise <em>académique et terrain</em></h2>
-    <div class="gold-rule"></div>
-  </div>
-
-  <div class="about-content reveal">
-
-    <!-- PHOTO -->
-    <div class="about-photo">
-      <img src="Images/Banjo.PNG" alt="Votre formateur" class="about-img">
-    </div>
-    
-    <!-- TEXTE -->
-    <div class="about-text">
-
-      <p class="about-desc">
-        Agrégée et docteure en mathématiques, j'enseigne à l'université depuis plus de 
-        <strong style="color: var(--white);">14 ans</strong> auprès d'étudiants en cursus informatique.
-        <br>
-        En parallèle, je développe mes propres stratégies de trading algorithmique et analyse les marchés financiers à travers les données.
-        <br>
-        Au fil de mon parcours, j'ai eu l'opportunité de me former en analyse macro-économique auprès d'un 
-        <strong style="color: var(--gold-light);">trader professionnel</strong>, afin de relier l'approche théorique aux réalités des marchés.
-
+      <!-- Sous-titre -->
+      <p class="offre-subtitle">
+        Savez-vous si votre stratégie tient — ou vous contentez-vous de l'espérer ?
       </p>
 
-      <div class="about-skills">
-        <div class="about-skill">
-          <div class="about-skill-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M2 20h20M6 20V10l6-6 6 6v10M10 20v-5h4v5"/>
-            </svg>
+<!-- Stats crédibilité -->
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">6</div>
+          <div class="hero-stat-lbl">Niveaux</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">133+</div>
+          <div class="hero-stat-lbl">Leçons</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val" id="years-teaching">14 ans</div>
+          <div class="hero-stat-lbl">D'enseignement</div>
+        </div>
+        <div class="hero-stat-sep"></div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">Bac+8</div>
+          <div class="hero-stat-lbl">Mathématiques</div>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="hero-scroll-hint" aria-hidden="true">
+        <div class="hero-scroll-hint-arrow"></div>
+      </div>
+    </div>
+
+        <!-- ── 1. AVANT / APRÈS ── -->
+        <div class="offre-block">
+          <span class="block-tag">Transformation</span>
+          <div class="offre-block-title" style="margin-bottom: var(--sp-7);">Ce qui change quand on arrête de trader au ressenti</div>
+          <div class="transformation-grid">
+
+            <!-- Ligne 0 : en-têtes -->
+            <div class="transfo-header-empty"></div>
+            <div class="transfo-header transfo-header--before">Avant</div>
+            <div class="transfo-header transfo-header--after">Après</div>
+
+            <!-- Ligne 1 : Stratégie -->
+            <div class="transfo-row-axis">Stratégie</div>
+            <div class="transfo-row-before">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--b">—</span>
+                <span>Aucune stratégie définie — on trade au ressenti, sans règles ni méthode</span>
+              </div>
+            </div>
+            <div class="transfo-row-after">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--a">✓</span>
+                <span>Des règles d'entrée et de sortie explicites, construites et testées sur données réelles</span>
+              </div>
+            </div>
+
+            <!-- Ligne 2 : Validation -->
+            <div class="transfo-row-axis">Validation</div>
+            <div class="transfo-row-before">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--b">—</span>
+                <span>On ne sait pas si les résultats sont reproductibles ou dus au hasard</span>
+              </div>
+            </div>
+            <div class="transfo-row-after">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--a">✓</span>
+                <span>On sait exactement si une performance tient — avant de risquer du capital</span>
+              </div>
+            </div>
+
+            <!-- Ligne 3 : Risque -->
+            <div class="transfo-row-axis">Risque</div>
+            <div class="transfo-row-before">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--b">—</span>
+                <span>Taille des positions décidée à l'intuition, sans calcul</span>
+              </div>
+            </div>
+            <div class="transfo-row-after">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--a">✓</span>
+                <span>Exposition calculée à chaque trade, indépendamment des émotions</span>
+              </div>
+            </div>
+
+            <!-- Ligne 4 : Exécution -->
+            <div class="transfo-row-axis">Exécution</div>
+            <div class="transfo-row-before transfo-row-before--last">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--b">—</span>
+                <span>Ordres passés manuellement, sous influence des émotions</span>
+              </div>
+            </div>
+            <div class="transfo-row-after transfo-row-after--last">
+              <div class="transfo-item">
+                <span class="transfo-icon transfo-icon--a">✓</span>
+                <span>Stratégies déployées automatiquement, selon des règles fixes</span>
+              </div>
+            </div>
+
           </div>
-          <div>
-            <div class="about-skill-title">Rigueur mathématique</div>
-            <p class="about-skill-desc">Pour construire des stratégies solides et comprendre réellement ce qui fonctionne.</p>
+        </div>
+
+        <!-- ── 2. ROADMAP TIMELINE PREMIUM ── -->
+        <!-- ── CORE STATEMENT ── -->
+        <div class="quant-note quant-note--r">
+          <div class="quant-note-label">Approche</div>
+          <div class="quant-note-text">Les marchés récompensent les processus. Pas les convictions.</div>
+        </div>
+        <div class="roadmap-block">
+          <span class="roadmap-block-tag">Parcours</span>
+          <div class="roadmap-block-title">Les 6 niveaux</div>
+          <p class="roadmap-block-subtitle">
+            {% if user.is_authenticated and not user.profil.has_premium %}
+              Le Niveau 1 est accessible gratuitement. Les niveaux suivants font partie du pack complet.
+            {% elif user.is_authenticated and user.profil.has_premium %}
+              Vous avez accès à l'intégralité du parcours.
+            {% else %}
+              Du praticien rigoureux au quantitatif autonome — une trajectoire sans raccourcis.
+            {% endif %}
+          </p>
+
+          <div class="tl">
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 1 — Fondations Python & Premier Backtest #}
+            {# 5 modules · 16 leçons · gratuit              #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="1">
+              <div class="tl-node"><div class="tl-index">01</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Fondations Python & Premier Backtest</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Apprendre les bases du langage de programmation Python et écrire son premier backtest fonctionnel.</div>
+                <div class="tl-competence">Poser les fondations d'un raisonnement quantitatif structuré</div>
+              </div>
+            </div>
+            {% elif user.is_authenticated and not user.profil.has_premium %}
+            <div class="tl-item" data-level="1">
+              <div class="tl-node"><div class="tl-index">01</div><div class="tl-dot tl-dot--current"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Fondations Python & Premier Backtest</div>
+                  <span class="tl-badge tl-badge--free">Débloqué</span>
+                </div>
+                <div class="tl-desc">Apprendre les bases du langage de programmation Python et écrire son premier backtest fonctionnel.</div>
+                <div class="tl-competence">Poser les fondations d'un raisonnement quantitatif structuré</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item" data-level="1">
+              <div class="tl-node"><div class="tl-index">01</div><div class="tl-dot tl-dot--current"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Fondations Python & Premier Backtest</div>
+                  <span class="tl-badge tl-badge--free">Inclus</span>
+                </div>
+                <div class="tl-desc">Apprendre les bases du langage de programmation Python et écrire son premier backtest fonctionnel.</div>
+                <div class="tl-competence">Poser les fondations d'un raisonnement quantitatif structuré</div>
+              </div>
+            </div>
+            {% endif %}
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 2 — Stratégie, Moteur & Métriques    #}
+            {# 11 modules · 33 leçons · premium             #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="2">
+              <div class="tl-node"><div class="tl-index">02</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Stratégie, Moteur de Backtest & Métriques</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Transformer une idée en stratégie mesurable — performance, risque et stabilité.</div>
+                <div class="tl-competence">Mesurer objectivement ce qui fonctionne — et ce qui ne fonctionne pas</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item tl-item--locked" data-level="2">
+              <div class="tl-node"><div class="tl-index">02</div><div class="tl-dot tl-dot--locked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Stratégie, Moteur de Backtest & Métriques</div>
+                  <span class="tl-badge tl-badge--premium">{% if user.is_authenticated %}Premium{% else %}Pack complet{% endif %}</span>
+                </div>
+                <div class="tl-desc">Transformer une idée en stratégie mesurable — performance, risque et stabilité.</div>
+                <div class="tl-competence">Mesurer objectivement ce qui fonctionne — et ce qui ne fonctionne pas</div>
+              </div>
+              <div class="tl-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            </div>
+            {% endif %}
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 3 — Architecture & Stratégie Pro     #}
+            {# 15 modules · 45 leçons · premium            #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="3">
+              <div class="tl-node"><div class="tl-index">03</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Code Structuré & Stratégie Professionnelle</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Structurer un code de recherche solide — classes Python, tests sur différentes périodes de marché, filtres de robustesse.</div>
+                <div class="tl-competence">Construire une méthode de recherche rigoureuse et maintenable</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item tl-item--locked" data-level="3">
+              <div class="tl-node"><div class="tl-index">03</div><div class="tl-dot tl-dot--locked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Code Structuré & Stratégie Professionnelle</div>
+                  <span class="tl-badge tl-badge--premium">{% if user.is_authenticated %}Premium{% else %}Pack complet{% endif %}</span>
+                </div>
+                <div class="tl-desc">Structurer un code de recherche solide — classes Python, tests sur différentes périodes de marché, filtres de robustesse.</div>
+                <div class="tl-competence">Construire une méthode de recherche rigoureuse et maintenable</div>
+              </div>
+              <div class="tl-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            </div>
+            {% endif %}
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 4 — Validation Quantitative          #}
+            {# 9 modules · 27 leçons · premium             #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="4">
+              <div class="tl-node"><div class="tl-index">04</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Tester, Valider & Gérer le Risque</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Apprendre à distinguer une vraie performance d'un hasard statistique — tests de robustesse, simulations et gestion des périodes difficiles.</div>
+                <div class="tl-competence">Savoir si une stratégie tient vraiment — avant de la trader</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item tl-item--locked" data-level="4">
+              <div class="tl-node"><div class="tl-index">04</div><div class="tl-dot tl-dot--locked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Tester, Valider & Gérer le Risque</div>
+                  <span class="tl-badge tl-badge--premium">{% if user.is_authenticated %}Premium{% else %}Pack complet{% endif %}</span>
+                </div>
+                <div class="tl-desc">Apprendre à distinguer une vraie performance d'un hasard statistique — tests de robustesse, simulations et gestion des périodes difficiles.</div>
+                <div class="tl-competence">Savoir si une stratégie tient vraiment — avant de la trader</div>
+              </div>
+              <div class="tl-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            </div>
+            {% endif %}
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 5 — Mise en Production Live          #}
+            {# 9 modules · ~27 leçons · premium            #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="5">
+              <div class="tl-node"><div class="tl-index">05</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Automatisation & Trading Live</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Passer de la recherche à la production réelle — connexion broker, exécution automatique, surveillance et alertes live.</div>
+                <div class="tl-competence">Faire tourner sa stratégie en automatique, sans intervention manuelle</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item tl-item--locked" data-level="5">
+              <div class="tl-node"><div class="tl-index">05</div><div class="tl-dot tl-dot--locked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Automatisation & Trading Live</div>
+                  <span class="tl-badge tl-badge--premium">{% if user.is_authenticated %}Premium{% else %}Pack complet{% endif %}</span>
+                </div>
+                <div class="tl-desc">Passer de la recherche à la production réelle — connexion broker, exécution automatique, surveillance et alertes live.</div>
+                <div class="tl-competence">Faire tourner sa stratégie en automatique, sans intervention manuelle</div>
+              </div>
+              <div class="tl-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            </div>
+            {% endif %}
+
+            {# ──────────────────────────────────────────── #}
+            {# NIVEAU 6 — Gestion de Portefeuille          #}
+            {# 4 modules · 12 leçons · premium             #}
+            {# ──────────────────────────────────────────── #}
+            {% if user.is_authenticated and user.profil.has_premium %}
+            <div class="tl-item" data-level="6">
+              <div class="tl-node"><div class="tl-index">06</div><div class="tl-dot tl-dot--unlocked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Gestion de Portefeuille Algorithmique</div>
+                  <span class="tl-badge tl-badge--free">✓ Accès</span>
+                </div>
+                <div class="tl-desc">Gérer plusieurs stratégies en parallèle, équilibrer les risques et recalibrer dans le temps.</div>
+                <div class="tl-competence">Gérer un portefeuille de stratégies de façon autonome et rigoureuse</div>
+              </div>
+            </div>
+            {% else %}
+            <div class="tl-item tl-item--locked" data-level="6">
+              <div class="tl-node"><div class="tl-index">06</div><div class="tl-dot tl-dot--locked"></div></div>
+              <div class="tl-body">
+                <div class="tl-header">
+                  <div class="tl-name">Gestion de Portefeuille Algorithmique</div>
+                  <span class="tl-badge tl-badge--premium">{% if user.is_authenticated %}Premium{% else %}Pack complet{% endif %}</span>
+                </div>
+                <div class="tl-desc">Gérer plusieurs stratégies en parallèle, équilibrer les risques et recalibrer dans le temps.</div>
+                <div class="tl-competence">Gérer un portefeuille de stratégies de façon autonome et rigoureuse</div>
+              </div>
+              <div class="tl-lock"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            </div>
+            {% endif %}
+
+          </div><!-- /tl -->
+        </div><!-- /roadmap-block -->
+
+        <!-- ── QUI ENSEIGNE ── -->
+        <div class="offre-block">
+          <span class="block-tag">Fondatrice</span>
+
+          <div class="founder-grid">
+            <!-- Colonne gauche : photo + badges -->
+            <div class="founder-left">
+              <div class="founder-photo-wrap">
+                <div class="founder-photo-placeholder">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(200,155,60,0.30)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                </div>
+              </div>
+              <div class="founder-badges">
+                <div class="founder-badge" id="years-teaching-founder">14 ans d'enseignement</div>
+                <div class="founder-badge">Docteure en mathématiques</div>
+              </div>
+            </div>
+
+            <!-- Colonne droite : texte -->
+            <div class="founder-right">
+              <div class="offre-block-title" style="margin-bottom:var(--sp-6);">Pourquoi cette académie existe</div>
+              <p class="founder-text">
+                Agrégée et docteure en mathématiques, j'enseigne depuis plus de 14 ans auprès d'étudiants en informatique. Les principes qui guident la recherche scientifique — formuler une hypothèse, la tester et la remettre en question — sont progressivement devenus le fil conducteur de mon approche des marchés financiers.             
+              </p>
+
+              <p class="founder-text">
+                En analysant les marchés financiers et en observant la manière dont de nombreux traders particuliers apprennent et prennent leurs décisions, j'ai constaté un même problème revenir sans cesse : beaucoup accumulent des informations, des indicateurs ou des stratégies, mais disposent rarement d'une méthode rigoureuse pour évaluer ce qui fonctionne réellement.
+              </p>
+
+              <p class="founder-text">
+                Cette académie n'est pas née d'une promesse de gains. Elle est née d'un constat : la plupart des particuliers apprennent le trading sans disposer d'un cadre fiable pour distinguer les résultats dus à un véritable avantage de ceux qui relèvent simplement du hasard.
+              </p>
+
+              <p class="founder-text">
+                L'idée est alors devenue évidente : appliquer aux stratégies de trading la même rigueur que celle utilisée en recherche scientifique. Formuler une hypothèse, la tester, l'invalider ou la confirmer à partir des données.
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /founder block -->
+
+        <!-- ── 3. POUR QUI ── -->
+        <div class="quant-note quant-note--l">
+          <div class="quant-note-label">Méthode</div>
+          <div class="quant-note-text">Un trade sans règle n'est pas une décision. C'est un pari.</div>
+        </div>
+        <div class="offre-block">
+          <span class="block-tag">Profil</span>
+          <div class="offre-block-title">Pour vous si</div>
+          <div class="included-list">
+            <div class="included-item">
+              <div class="included-icon">›</div>
+              <div>
+                <strong>Vous voulez construire des stratégies avec une rigueur professionnelle</strong>
+                <span>Backtesting rigoureux, validation statistique, gestion quantitative du risque — les méthodes utilisées par les équipes quantitatives professionnelles, sans les raccourcis.</span>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-icon">›</div>
+              <div>
+                <strong>Vous tradez mais sans savoir ce qui fonctionne vraiment — ni pourquoi</strong>
+                <span>Avec une méthode de validation, vous saurez exactement quoi corriger — et quoi conserver.</span>
+              </div>
+            </div>
+            <div class="included-item">
+              <div class="included-icon">›</div>
+              <div>
+                <strong>Vous voulez arrêter de trader manuellement et construire vos premières stratégies automatisées</strong>
+                <span>Débutant ou déjà expérimenté en Python — le parcours vous donne les outils pour passer du trading manuel à une approche systématique.</span>
+              </div>
+            </div>
+          
+            <div class="section-sep"></div>
+            <div class="included-item">
+              <div class="included-icon included-icon--red">✕</div>
+              <div>
+                <strong style="color:var(--cream);">Pas pour vous</strong>
+                <span>Si vous cherchez un signal clé en main, une stratégie toute faite ou des promesses de rendement — ce parcours n'est pas fait pour vous.</span>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="about-skill">
-          <div class="about-skill-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
-            </svg>
+
+        <div class="quant-note quant-note--r" style="max-width:760px;">
+          <div class="quant-note-label">Pédagogie</div>
+          <div class="quant-note-text">Du code réel, des données réelles, des backtests réels. Pas de la théorie.</div>
+        </div>
+
+        <!-- ── 4. INCLUS ── -->
+        <div class="offre-block">
+          <span class="block-tag">Contenu</span>
+          <div class="offre-block-title">Une pédagogie pensée pour vous</div>
+          <p class="offre-block-subtitle">Chaque niveau livré avec le code, les données et les sessions pour aller au-delà de la théorie.</p>
+          <div class="pack-list">
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--gold">◆</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">Vos backtests analysés en direct</div>
+                <div class="pack-item-sub">Vous repartez avec des corrections concrètes, pas des généralités</div>
+              </div>
+              <span class="pack-item-highlight">Live</span>
+            </div>
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--gold">→</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">Du code réel, structuré, adaptable</div>
+                <div class="pack-item-sub">Que vous pouvez reprendre et appliquer à vos propres marchés</div>
+              </div>
+            </div>
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--gold">→</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">Vos idées testées sur des données réelles</div>
+                <div class="pack-item-sub">Données de marché historiques incluses dès le premier niveau</div>
+              </div>
+            </div>
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--green">↻</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">Le contenu évolue avec les marchés</div>
+                <div class="pack-item-sub">Votre accès reste toujours à jour, sans frais supplémentaires</div>
+              </div>
+              <span class="pack-item-highlight">Inclus</span>
+            </div>
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--gold">→</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">Des réponses là où vous en avez besoin</div>
+                <div class="pack-item-sub">Questions par leçon — les échanges restent contextuels et utiles</div>
+              </div>
+            </div>
+            <div class="pack-item">
+              <div class="pack-item-icon pack-item-icon--green">∞</div>
+              <div class="pack-item-body">
+                <div class="pack-item-title">À votre rythme, sans limite de temps ni abonnement</div>
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="about-skill-title">Pédagogie éprouvée</div>
-            <p class="about-skill-desc">Pour expliquer chaque concept simplement — même à quelqu'un qui part de zéro.</p>
+        </div>
+
+        <!-- ── 5. FAQ ── -->
+        <div class="quant-note quant-note--c">
+          <div class="quant-note-label">Transformation</div>
+          <div class="quant-note-text">Vous ne suivrez plus. Vous construirez.</div>
+        </div>
+        <div class="offre-block">
+          <span class="block-tag">FAQ</span>
+          <div class="offre-block-title">Questions fréquentes</div>
+          <div class="faq-list">
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <button class="faq-question">
+                <span>Ce parcours convient-il si je débute en trading ?</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p>Oui, à condition d'être prêt à travailler avec une méthode. Le parcours ne suppose aucune expérience préalable en trading — il vous apprend à construire et valider des stratégies depuis le début. Ce qu'il suppose, c'est la volonté d'apprendre à raisonner de façon rigoureuse, pas de suivre des signaux.</p>
+              </div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <button class="faq-question">
+                <span>Faut-il installer des logiciels particuliers ?</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p>Python s'installe gratuitement en quelques minutes. Tous les outils utilisés dans le parcours sont open source — aucun logiciel payant requis.</p>
+              </div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <button class="faq-question">
+                <span>Faut-il déjà savoir coder en Python ?</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p>Non. Le Niveau 1 part de bases Python accessibles. Si vous avez déjà de l'expérience, vous progresserez plus vite — mais la progression est conçue pour ne laisser personne derrière sur la partie technique.</p>
+              </div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <button class="faq-question">
+                <span>Est-ce que j'apprends à construire mes propres stratégies ?</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p>Oui. Chaque niveau vous apprend à construire et tester vos propres stratégies sur données réelles. Vous repartez avec une méthode, pas avec un signal tout fait. Les résultats dépendent de ce que vous en faites.</p>
+              </div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+              <button class="faq-question">
+                <span>Le contenu pédagogique est-il téléchargeable ?</span>
+                <svg class="faq-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </button>
+              <div class="faq-answer">
+                <p>Tous les notebooks et données sont téléchargeables directement à partir de votre navigateur.</p>
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
+      <!-- FIN colonne gauche -->
 
-      <!-- Citation mise en avant -->
+      <!-- ═ PRICING STICKY ELITE — Phase 3 ═ -->
+      <div class="offre-sticky-wrapper">
+        <div class="offre-card">
 
-      <div class="quote-divider">
-        <blockquote class="about-quote">
-          "N'importe qui peut comprendre un concept complexe<br>si on lui explique correctement."
-        </blockquote>
-      </div>
+          <div class="offre-card-label">Pack complet</div>
 
-      <p class="about-desc">
-        Cette formation rassemble ce que j'aurais aimé avoir dès le départ — 
-        <strong style="color: var(--gold-light);">une méthode claire pour comprendre, tester et construire 
-        ses propres stratégies, accessible à toute personne prête à apprendre.</strong>
-      </p>
+          <!-- ★ Micro-copy institutionnelle -->
+          <p class="offre-card-tagline">
+            Construisez. Testez. Déployez.
+          </p>
 
-      <div class="about-stats">
-        <div class="about-stat">
-          <div class="about-stat-num">14</div>
-          <div class="about-stat-label">ans d'enseignement</div>
+          <div class="offre-price-row">
+            <div class="offre-price">990€</div>
+            <div>
+              <div style="font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,155,60,0.50); margin-bottom:2px;">Prix de lancement</div>
+              <div class="offre-price-old">1290€</div>
+            </div>
+          </div>
+
+          <p class="offre-price-note">
+            Paiement unique · <strong>Accès à vie</strong>
+          </p>
+
+          <!-- Checklist -->
+          <div class="offre-card-includes">
+            <div class="offre-card-include">Accès immédiat aux 6 niveaux</div>
+            <div class="offre-card-include">Sessions live incluses à chaque niveau</div>
+            <div class="offre-card-include">Notebooks et données téléchargeables</div>
+          </div>
+
+          <!-- CTA conditionnel -->
+          {% if user.is_authenticated %}
+            {% if user.profil.has_premium %}
+              <div class="offre-premium-status">Vous avez accès à l'intégralité de la formation.</div>
+              <div class="offre-cta-wrap">
+                <a href="{% url 'dashboard' %}" class="offre-cta offre-cta--secondary">
+                  Reprendre ma progression →
+                </a>
+              </div>
+            {% else %}
+              <div class="offre-cta-wrap">
+                <a href="{% url 'checkout' %}" class="offre-cta">
+                  Commencez le parcours →
+                </a>
+              </div>
+            {% endif %}
+          {% else %}
+            <div class="offre-cta-wrap">
+              <a href="{% url 'signup' %}" class="offre-cta">
+                Commencez le parcours →
+              </a>
+            </div>
+          {% endif %}
+
+          <p class="offre-guarantee">
+            Des questions ? <a href="{% url 'contact' %}">On vous répond.</a>
+          </p>
+
         </div>
-        <div class="about-stat">
-          <div class="about-stat-num">Bac+8</div>
-          <div class="about-stat-label">Docteure en mathématiques</div>
-        </div>
-        <div class="about-stat">
-          <div class="about-stat-num">100%</div>
-          <div class="about-stat-label">Orienté pratique</div>
-        </div>
       </div>
 
-    </div>
+    </div><!-- FIN offre-grid -->
   </div>
-</section>
+</div>
 
-
-
-
-
-
-
-
-
-<!-- FAQ -->
-<section class="section">
-  <div class="reveal">
-    <p class="section-tag">Questions fréquentes</p>
-    <h2 class="section-title">Tout ce que vous <em>voulez savoir</em></h2>
-    <div class="gold-rule"></div>
-  </div>
-  <div class="faq-list">
-    <div class="faq-item reveal">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Faut-il savoir coder pour commencer ?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>Non. Le niveau 1 part de zéro et vous guide pas à pas dans les bases de la programmation appliquée au trading. Aucun prérequis technique n'est nécessaire.</p>
-      </div>
-    </div>
-    <div class="faq-item reveal">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Et si je suis bloqué sur un exercice ?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>Chaque leçon dispose d'une section commentaires. Posez votre question directement sous le contenu concerné et obtenez une réponse rapidement.</p>
-      </div>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:0.05s">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Combien de temps faut-il par semaine ?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>Comptez 3 à 5 heures par semaine pour progresser confortablement. Les modules sont courts et autonomes, vous avancez à votre rythme sans contrainte de planning.</p>
-      </div>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:0.1s">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        Est-ce que je reçois le code source ?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>Oui, intégralement. Chaque module inclut le code source complet et les modèles de stratégies prêts à être utilisés ou adaptés.</p>
-      </div>
-    </div>
-    <div class="faq-item reveal" style="transition-delay:0.15s">
-      <button class="faq-question" onclick="toggleFaq(this)">
-        De quel broker ai-je besoin ?
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-answer">
-        <p>La formation ne nécessite pas un broker en particulier. Vous êtes libre de choisir votre propre broker. Nous utilisons juste un compte démo chez Interactive Broker pour vous montrer comment accéder gratuitement à l'historique des données de marchés.</p>
-      </div>
-    </div>
-    
-  </div>
-</section>
-
-
-
-
-<!-- RETOUR SUR INVESTISSEMENT -->
-<section class="section">
-  <div class="reveal">
-    <p class="section-tag">Retour sur investissement</p>
-    <h2 class="section-title">Un investissement —<br><em>une compétence pour toujours</em></h2>
-    <p class="section-desc">
-      Vous ne payez pas pour accéder à du contenu. Vous investissez dans une compétence 
-      que vous gardez toute votre vie — et qui peut vous rapporter bien plus que ce qu'elle vous coûte.
-    </p>
-    <div class="gold-rule"></div>
-  </div>
-
-  <div class="roi-grid reveal">
-
-    <div class="roi-card">
-      <div class="roi-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
-        </svg>
-      </div>
-      <div class="roi-num">498€</div>
-      <div class="roi-label">Une seule fois</div>
-      <p class="roi-desc">Pas d'abonnement, pas de renouvellement. Vous payez une fois et accédez à tout — pour toujours.</p>
-    </div>
-
-    <div class="roi-card">
-      <div class="roi-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-        </svg>
-      </div>
-      <div class="roi-num">0€</div>
-      <div class="roi-label">De logiciels requis</div>
-      <p class="roi-desc">Tous les outils utilisés dans la formation sont gratuits. Votre seul investissement, c'est la formation.</p>
-    </div>
-
-    <div class="roi-card">
-      <div class="roi-icon">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
-        </svg>
-      </div>
-      <div class="roi-num">∞</div>
-      <div class="roi-label">Stratégies possibles</div>
-      <p class="roi-desc">Vous ne repartez pas avec une stratégie. Vous repartez avec la capacité d'en créer autant que vous voulez, sur n'importe quel marché.</p>
-    </div>
-
-  </div>
-
-  <div class="roi-message reveal">
-    <p>
-      Un coût faible pour acquérir une compétence rare — 
-      maîtrisée par les professionnels de la finance et désormais 
-      <strong style="color:var(--gold-light);">accessible à toute personne prête à apprendre.</strong>
-    </p>
-  </div>
-
-</section>
-
-
-
-
-<!-- CTA FINAL -->
-<section class="cta-section">
-  <div class="reveal">
-    <p class="section-tag">Prêt à commencer ?</p>
-    <h2>Prenez le contrôle de<br>
-    <strong>vos finances</strong></h2>
-    <p class="hero-subtitle" style="margin: 16px auto 40px;">Rejoignez la formation et créez des stratégies qui travaillent pour vous.</p>
-    <a href="#offre" class="btn-primary">Commencer gratuitement →</a>
-  </div>
-</section>
-
-
-
-
-
-<!-- FOOTER -->
+<!-- ══════════ FOOTER ══════════ -->
 <footer>
-  <div class="footer-brand">
-    <img src="Logo/logo.png" alt="Logo Académie Trading Algorithmique" class="logo">
-    <span class="footer-text">© 2026 Académie de trading algorithmique — Tous droits réservés</span>
-  </div>
-  <ul class="footer-links">
-    <li><a href="#">Mentions légales</a></li>
-    <li><a href="#">CGV</a></li>
-    <li><a href="#">Contact</a></li>
-  </ul>
+  © 2026 Académie de Trading Algorithmique — Tous droits réservés
 </footer>
 
-
-
-
-
+<!-- ══════════ JS ══════════ -->
 <script>
-  // Scroll reveal
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.12 });
+  /* ── Années d'enseignement — calcul automatique ── */
+  const teachingEl = document.getElementById('years-teaching');
+  const teachingFounderEl = document.getElementById('years-teaching-founder');
+  const years = new Date().getFullYear() - 2012;
+  if (teachingEl) teachingEl.textContent = years + ' ans';
+  if (teachingFounderEl) teachingFounderEl.textContent = years + " ans d'enseignement";
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Nav background on scroll
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* ── Core statement — fade-in au scroll ── */
+  const coreEl = document.querySelector('.core-statement');
+  if (coreEl && 'IntersectionObserver' in window) {
+    const coreObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          coreEl.classList.add('is-visible');
+          coreObs.unobserve(coreEl);
+        }
+      });
+    }, { threshold: 0.2 });
+    coreObs.observe(coreEl);
+  }
+
+  /* ── Intersection Observer — fadeInUp scroll ── */
+  if ('IntersectionObserver' in window) {
+    const els = document.querySelectorAll('.offre-block, .offre-card, .roadmap-block');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.animationPlayState = 'running';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07 });
+    els.forEach(el => { el.style.animationPlayState = 'paused'; io.observe(el); });
+  }
+
+  /* ── Nav scroll opacity ── */
   const nav = document.querySelector('nav');
+  let lastScroll = 0;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
-      nav.style.background = 'rgba(10,22,40,0.97)';
-      nav.style.borderBottom = '1px solid rgba(200,155,60,0.12)';
-      nav.style.backdropFilter = 'blur(12px)';
+    const s = window.scrollY;
+    if (s > 40) {
+      nav.style.background = 'rgba(4,8,18,0.94)';
     } else {
-      nav.style.background = 'linear-gradient(to bottom, rgba(10,22,40,0.95), transparent)';
-      nav.style.borderBottom = 'none';
+      nav.style.background = 'rgba(4,8,18,0.82)';
     }
-  });
-
-  // FAQ
-    function toggleFaq(btn) {
-      const item = btn.parentElement;
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
-
-
-  // Burger menu
-function toggleMenu() {
-  document.getElementById('burger').classList.toggle('open');
-  document.getElementById('nav-links').classList.toggle('open');
-}
-
-// Ferme le menu au clic sur un lien
-document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    document.getElementById('burger').classList.remove('open');
-    document.getElementById('nav-links').classList.remove('open');
-  });
-});
-
-
-// CTA flottant mobile — apparaît après le hero
-const mobileCta = document.getElementById('mobile-cta');
-const heroSection = document.querySelector('header');
-
-const ctaObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (!e.isIntersecting) {
-      mobileCta.classList.add('visible');
-    } else {
-      mobileCta.classList.remove('visible');
-    }
-  });
-}, { threshold: 0.1 });
-
-if (heroSection) ctaObserver.observe(heroSection);
-
-
-// Carrousel
-let currentSlide = 0;
-const totalSlides = 4;
-
-function moveCarousel(direction) {
-  currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-  updateCarousel();
-}
-
-function goToSlide(index) {
-  currentSlide = index;
-  updateCarousel();
-}
-
-function updateCarousel() {
-  document.getElementById('carouselTrack').style.transform = `translateX(-${currentSlide * 100}%)`;
-  document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-    dot.classList.toggle('active', i === currentSlide);
-  });
-}
-
-
+    lastScroll = s;
+  }, { passive: true });
 </script>
 
+<!-- ══════════════════════════════════════════════
+     PHASE 6 — DASHBOARD HOOKS (commentaires Django)
+     À intégrer dans dashboard.html / lecon.html
+══════════════════════════════════════════════
+     
+     HOOK 1 — Niveau verrouillé dans le dashboard
+     ─────────────────────────────────────────────
+     Dans votre template de liste de niveaux (dashboard),
+     ajouter sur les niveaux premium :
 
+     {% if not user.profil.has_premium and niveau.ordre > 1 %}
+       <div class="dashboard-lock-nudge">
+         <div class="dlk-header">
+           <span class="dlk-num">{{ niveau.ordre }}</span>
+           <span class="dlk-name">{{ niveau.nom }}</span>
+           <span class="dlk-badge">Premium</span>
+         </div>
+         <p class="dlk-competence">{{ niveau.competence_acquise }}</p>
+         <a href="{% url 'offre' %}" class="dlk-cta">Débloquer ce niveau</a>
+       </div>
+     {% endif %}
 
+     CSS à ajouter dans dashboard.css :
+     .dashboard-lock-nudge {
+       opacity: 0.50; cursor: pointer;
+       border: 1px solid rgba(200,155,60,0.10);
+       border-radius: 12px; padding: 14px 16px;
+       transition: opacity 0.24s ease, border-color 0.24s ease;
+     }
+     .dashboard-lock-nudge:hover {
+       opacity: 0.80; border-color: rgba(200,155,60,0.24);
+     }
+     .dlk-cta {
+       display: inline-flex; align-items: center; gap: 6px;
+       font-size: 11px; font-weight: 600; color: #c8972a;
+       text-decoration: none; margin-top: 8px;
+       opacity: 0; transition: opacity 0.22s ease;
+     }
+     .dashboard-lock-nudge:hover .dlk-cta { opacity: 1; }
 
+     ─────────────────────────────────────────────
+     HOOK 2 — Fin de leçon niveau 1 (moment upgrade)
+     ─────────────────────────────────────────────
+     Dans lecon_detail.html, si c'est la dernière leçon
+     du niveau 1 et l'utilisateur n'est pas premium :
 
-<!-- CTA FLOTTANT MOBILE -->
-<div class="mobile-cta" id="mobile-cta">
-  <a href="#offre" class="btn-primary" style="width:100%;text-align:center;">
-    Commencer gratuitement →
-  </a>
-</div>
+     {% if is_last_lecon_niveau_1 and not user.profil.has_premium %}
+       <div class="lesson-end-upgrade">
+         <p class="leu-label">Niveau 1 terminé</p>
+         <h3 class="leu-title">Continuez avec le Niveau 2</h3>
+         <p class="leu-sub">{{ niveau_2.competence_acquise }}</p>
+         <a href="{% url 'offre' %}" class="leu-cta">Accéder au parcours complet</a>
+       </div>
+     {% endif %}
 
+     ─────────────────────────────────────────────
+     HOOK 3 — Barre de progression dashboard gratuit
+     ─────────────────────────────────────────────
+     Afficher en haut du dashboard :
 
+     {% if not user.profil.has_premium %}
+       <div class="progress-upgrade-bar">
+         <div class="pub-text">
+           Niveau 1 — {{ user.progression_pct|default:"0" }}% complété
+         </div>
+         <a href="{% url 'offre' %}" class="pub-cta">Voir le parcours complet →</a>
+       </div>
+     {% endif %}
+
+     Ce hook s'affiche toujours, sans agressivité.
+     Le lien renvoie sur l'offre, jamais directement checkout.
+
+══════════════════════════════════════════════ -->
 
 </body>
 </html>
